@@ -1,6 +1,7 @@
 # DHS Form G-28 System
 
-This project is, or will be, composed of a suite of Docker Microservices and associated User Interfaces for demonstrating a fully automated CI/CD Pipeline and Enterprise Deployment System.
+## Project Goals
+To build a suite of Docker Microservices, and an associated User Interface, for capturing data from the DHS Form G-28 in a modern UI, and for demonstrating a fully automated CI/CD Pipeline and Enterprise Deployment System.
 
 - Project Start: 11/21/2017
 

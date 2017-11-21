@@ -18,5 +18,6 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 
 ### Building and Running UI in Docker
 1.  cd UI
+1.  ng build
 1.  docker build -t g28form .
 1.  docker run -p 8000:80 g28form

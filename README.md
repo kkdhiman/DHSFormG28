@@ -12,6 +12,11 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 - OS: win32 x64
 - Angular: 5x
 
-### Running UI
+### Running UI For Development
 1.  cd UI
 1.  ng serve --open
+
+### Building and Running UI in Docker
+1.  cd UI
+1.  docker build -t g28form .
+1.  docker run -p 8000:80 g28form

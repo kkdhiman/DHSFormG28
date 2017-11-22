@@ -14,6 +14,7 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 
 ### Running UI For Development
 1.  cd UI
+1.  npm install
 1.  ng serve --open
 
 ### Building and Running UI in Docker

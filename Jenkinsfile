@@ -5,9 +5,9 @@ node {
         docker.image('node:carbon').inside() {
             stage('Build') { 
                 echo 'Building...'
-                sh 'cd UI'
-                sh 'npm install'
-                sh 'ng build'
+                sh 'cd UI; pwd'
+                /*sh 'npm install'
+                sh 'ng build'*/
             }
             stage('Test') {
                 echo 'Testing...'

@@ -6,7 +6,7 @@ node {
 
     stage('UI') {
         /* Requires the Docker Pipeline plugin to be installed */
-        docker.image('node:carbon').inside('-w ${WORKSPACE}/UI') {
+        docker.image('node:carbon').withRun('-u root') {
             stage('Build') { 
                 echo 'Building...'
 

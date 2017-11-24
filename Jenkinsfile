@@ -12,13 +12,13 @@ node {
                 -v /var/lib/jenkins/workspace/DHSFormG28:/src/app node:latest'
 
             // Run npm install in the docker container
-            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "cd /src/app/UI;npm install"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /src/app/UI;npm install"'
 
             // Install angular ci so we can use 'ng' command in next step
-            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
 
             // Build artifacts
-            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "cd /src/app/UI;ng build"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /src/app/UI;ng build"'
         }
 
         stage('Test UI') {

@@ -4,25 +4,28 @@ node {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
     }
 
-    stage('UI') {
-        /* Requires the Docker Pipeline plugin to be installed */
-        docker.image('node:7-alpine').withRun('-u root') {
-            stage('Build') { 
-                echo 'Building...'
+    // Perform the build in an appropriate docker container so we don't have to install
+    // project specific artifacts on the Jenkins server itself.
+    try {
+        stage('Build UI') { 
+            sh 'docker run -it -d --name="dhsg28-ui-build" \
+                -v /var/lib/jenkins/workspace/DHSFormG28:/src/app node:latest'
 
-                // Change to the UI project dir and list files
-                sh 'cd UI; pwd; ls -la; node --version; npm --version'
+            // Run npm install in the docker container
+            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "cd /src/app/UI;npm install"'
 
-                // Run npm install to install node dependencies
-                sh 'cd UI; npm install'
+            // Install angular ci so we can use 'ng' command in next step
+            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
 
-                // Use Angule CLI to create build artifacts
-                sh 'cd UI; ng build'
-            }
-
-            stage('Test') {
-                echo 'Testing...'
-            }
+            // Build artifacts
+            sh 'docker exec -it dhsg28-ui-build /bin/bash -c "cd /src/app/UI;ng build"'
         }
+
+        stage('Test UI') {
+            echo 'Testing...'
+        }
+    } finally {
+        sh 'docker container stop dhsg28-ui-build'
+        sh 'docker container rm dhsg28-ui-build'
     }
 }

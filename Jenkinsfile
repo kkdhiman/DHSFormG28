@@ -14,10 +14,10 @@ node {
                 sh 'cd UI; pwd; ls -la'
 
                 // Run npm install to install node dependencies
-                sh 'npm install'
+                sh 'cd UI; npm install'
 
                 // Use Angule CLI to create build artifacts
-                sh 'ng build'
+                sh 'cd UI; ng build'
             }
 
             stage('Test') {

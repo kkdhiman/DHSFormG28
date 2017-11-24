@@ -11,7 +11,7 @@ node {
                 echo 'Building...'
 
                 // Change to the UI project dir and list files
-                sh 'cd UI; pwd; ls -la'
+                sh 'cd UI; pwd; ls -la; node --version; npm --version'
 
                 // Run npm install to install node dependencies
                 sh 'cd UI; npm install'

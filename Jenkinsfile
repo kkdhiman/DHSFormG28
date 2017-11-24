@@ -9,15 +9,19 @@ node {
         docker.image('node:carbon').inside('-w ${WORKSPACE}/UI') {
             stage('Build') { 
                 echo 'Building...'
+
+                // Change to the UI project dir and list files
                 sh 'cd UI; pwd; ls -la'
-                /*sh 'npm install'
-                sh 'ng build'*/
+
+                // Run npm install to install node dependencies
+                sh 'npm install'
+
+                // Use Angule CLI to create build artifacts
+                sh 'ng build'
             }
+
             stage('Test') {
                 echo 'Testing...'
-            }
-            stage('Deploy') {
-                echo 'Deploying..'
             }
         }
     }

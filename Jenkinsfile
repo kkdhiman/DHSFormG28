@@ -6,7 +6,7 @@ node {
 
     stage('UI') {
         /* Requires the Docker Pipeline plugin to be installed */
-        docker.image('node:latest').withRun('-u root') {
+        docker.image('node:7-alpine').inside {
             stage('Build') { 
                 echo 'Building...'
 

@@ -2,9 +2,10 @@ node {
 
     stage('UI') {
         /* Requires the Docker Pipeline plugin to be installed */
-        docker.image('node:carbon').inside('-v $WORKSPACE/UI:/usr/src/app') {
+        docker.image('node:carbon').inside() {
             stage('Build') { 
                 echo 'Building...'
+                sh 'cd UI'
                 sh 'npm install'
                 sh 'ng build'
             }

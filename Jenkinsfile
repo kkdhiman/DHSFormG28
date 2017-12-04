@@ -43,7 +43,7 @@ node {
 
                 # Run the owasp/dependency-check Docker Container against the src directory of the earthquake-design-ws project
                 docker run --rm \
-                    -v ${WORKSPACE}:/src:ro \
+                    -v ${WORKSPACE}/UI:/src:ro \
                     -v ${OWASP_DATA_DIR}:/usr/share/dependency-check/data:rw \
                     -v ${OWASP_REPORT_DIR}:/report:rw \
                     owasp/dependency-check \

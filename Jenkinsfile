@@ -94,7 +94,7 @@ node {
 
             sh '''
                 # Get the ECS Registry login string
-                DOCKER_LOGIN=`aws ecr get-login --region us-east-1`
+                DOCKER_LOGIN=`aws ecr get-login --no-include-email --region us-east-1`
 
                 # Execute ECS Registry login command
                 ${DOCKER_LOGIN}

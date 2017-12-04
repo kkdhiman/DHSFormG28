@@ -62,7 +62,7 @@ node {
                 allowMissing: false, 
                 alwaysLinkToLastBuild: false, 
                 keepAll: false, 
-                reportDir: '${WORKSPACE}/owasp-report', 
+                reportDir: 'owasp-report', 
                 reportFiles: 'dependency-check-report.html', 
                 reportName: 'Dependency Vulnerability Report', 
                 reportTitles: 'OWASP Dependency Scan'])

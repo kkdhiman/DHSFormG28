@@ -8,17 +8,18 @@ node {
     // project specific artifacts on the Jenkins server itself.
     try {
         stage('Build UI') { 
+            // TODO: Make these first three steps obsolete by creating a custom image.
             sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v ${WORKSPACE}/DHSFormG28:/src/app node:latest'
-
-            // Run npm install in the docker container
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /src/app/UI;npm install"'
+                -v ${WORKSPACE}/DHSFormG28/UI:/app node:7'
 
             // Install angular ci so we can use 'ng' command in next step
             sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
 
+            // Run npm install in the docker container
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app/UI;npm install"'
+
             // Build artifacts
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /src/app/UI;ng build"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app/UI;ng build"'
         }
 
         stage('Test UI') {

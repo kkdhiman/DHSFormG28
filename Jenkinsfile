@@ -10,7 +10,7 @@ node {
         stage('Build UI') { 
             // TODO: Make these first three steps obsolete by creating a custom image.
             sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v ${WORKSPACE}/DHSFormG28/UI:/app node:7'
+                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app node:7'
 
             // Install angular ci so we can use 'ng' command in next step
             sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'

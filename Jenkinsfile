@@ -42,16 +42,16 @@ node {
                 fi
 
                 # Run the owasp/dependency-check Docker Container against the src directory of the earthquake-design-ws project
-                docker run --name="owasp_scan" \
+                docker run --rm \
                     -v ${WORKSPACE}/UI:/src:ro \
                     -v ${OWASP_DATA_DIR}:/usr/share/dependency-check/data:rw \
                     -v ${OWASP_REPORT_DIR}:/report:rw \
                     owasp/dependency-check \
                     --scan /src \
                     --format "ALL" \
+                    -o /report \
+                    -l /report \
                     --project "DHSFormG28"
-
-                docker logs owasp_scan
             '''
 
         }

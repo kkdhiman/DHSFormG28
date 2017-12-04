@@ -16,10 +16,10 @@ node {
             sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
 
             // Run npm install in the docker container
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app/UI;npm install"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'
 
             // Build artifacts
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app/UI;ng build"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"'
         }
 
         stage('Test UI') {

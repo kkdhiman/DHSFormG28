@@ -92,19 +92,21 @@ node {
             
             echo 'Deploying DHSFormG28 Docker Image to ECS...'
 
-            // Get the ECS Registry login string
-            DOCKER_LOGIN=`aws ecr get-login --region us-east-1`
+            sh '''
+                // Get the ECS Registry login string
+                DOCKER_LOGIN=`aws ecr get-login --region us-east-1`
 
-            // Execute ECS Registry login command
-            ${DOCKER_LOGIN}
+                // Execute ECS Registry login command
+                ${DOCKER_LOGIN}
 
-            // Push docker image to ECS Registry
-            docker tag g28form:latest 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+                // Push docker image to ECS Registry
+                docker tag g28form:latest 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
 
-            // Push docker image to ECS Registry
-            docker push 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+                // Push docker image to ECS Registry
+                docker push 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
 
-            // TODO: Leverage ECS Fargate to run the new image
+                // TODO: Leverage ECS Fargate to run the new image
+            '''
 
         }
     } finally {

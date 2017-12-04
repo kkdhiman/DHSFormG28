@@ -9,7 +9,7 @@ node {
     try {
         stage('Build UI') { 
             sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v /var/lib/jenkins/workspace/DHSFormG28:/src/app node:latest'
+                -v ${WORKSPACE}/DHSFormG28:/src/app node:latest'
 
             // Run npm install in the docker container
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /src/app/UI;npm install"'

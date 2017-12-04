@@ -30,26 +30,28 @@ node {
                 # Define and create a directory for OWASP Dependency Data
                 OWASP_DATA_DIR=${HOME}/owasp-data
                 if [ ! -d "${OWASP_DATA_DIR}" ]; then
-                mkdir -p ${OWASP_DATA_DIR}
-                chmod -R 777 ${OWASP_DATA_DIR}
+                    mkdir -p ${OWASP_DATA_DIR}
+                    chmod -R 777 ${OWASP_DATA_DIR}
                 fi
 
                 # Define and create a directory for the OWASP Dependency Analysis Report run against node_modules
                 OWASP_REPORT_DIR=${WORKSPACE}/owasp-report
                 if [ ! -d "${OWASP_REPORT_DIR}" ]; then
-                mkdir -p ${OWASP_REPORT_DIR}
-                chmod -R 777 ${OWASP_REPORT_DIR}
+                    mkdir -p ${OWASP_REPORT_DIR}
+                    chmod -R 777 ${OWASP_REPORT_DIR}
                 fi
 
                 # Run the owasp/dependency-check Docker Container against the src directory of the earthquake-design-ws project
-                docker run --rm \
+                docker run --name="owasp_scan" \
                     -v ${WORKSPACE}/UI:/src:ro \
                     -v ${OWASP_DATA_DIR}:/usr/share/dependency-check/data:rw \
                     -v ${OWASP_REPORT_DIR}:/report:rw \
                     owasp/dependency-check \
                     --scan /src \
-                    --format="ALL" \
-                    --project=DHSFormG28
+                    --format "ALL" \
+                    --project "DHSFormG28"
+
+                docker logs owasp_scan
             '''
 
         }

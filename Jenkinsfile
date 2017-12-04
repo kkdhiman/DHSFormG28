@@ -4,7 +4,13 @@ node {
     cleanWs()
 
     stage('Checkout Code') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
+        checkout([
+            $class: 'GitSCM', 
+            branches: [[name: '*/master']], 
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: [], 
+            submoduleCfg: [], 
+            userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
     }
 
     // Perform the build in an appropriate docker container so we don't have to install
@@ -75,12 +81,31 @@ node {
         }
 
         stage('Build Docker Container') {
+            
             echo 'Building DHS G-28 Form Docker Image...'
+
             sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest .'
+            
         }
 
         stage('Deploy to ECS') {
-            // ToDO: Deploy container to ECS
+            
+            echo 'Deploying DHSFormG28 Docker Image to ECS...'
+
+            // Get the ECS Registry login string
+            DOCKER_LOGIN=`aws ecr get-login --region us-east-1`
+
+            // Execute ECS Registry login command
+            ${DOCKER_LOGIN}
+
+            // Push docker image to ECS Registry
+            docker tag g28form:latest 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+
+            // Push docker image to ECS Registry
+            docker push 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+
+            // TODO: Leverage ECS Fargate to run the new image
+
         }
     } finally {
         sh 'docker container stop dhsg28-ui-build'

@@ -1,5 +1,8 @@
 node {
 
+    // Clean Workspace
+    cleanWs()
+
     stage('Checkout Code') {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
     }
@@ -54,15 +57,30 @@ node {
                     --project "DHSFormG28"
             '''
 
+            // Publish Dependency Scan Report
+            publishHTML([
+                allowMissing: false, 
+                alwaysLinkToLastBuild: false, 
+                keepAll: false, 
+                reportDir: '${WORKSPACE}/owasp-report', 
+                reportFiles: 'dependency-check-report.html', 
+                reportName: 'Dependency Vulnerability Report', 
+                reportTitles: 'OWASP Dependency Scan'])
+
         }
 
         stage('Test UI') {
+            // TODO: Run protractor and selenium to test front-end
             echo 'Testing...'
         }
 
         stage('Build Docker Container') {
             echo 'Building DHS G-28 Form Docker Image...'
             sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest .'
+        }
+
+        stage('Deploy to ECS') {
+            // ToDO: Deploy container to ECS
         }
     } finally {
         sh 'docker container stop dhsg28-ui-build'

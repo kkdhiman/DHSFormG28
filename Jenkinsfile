@@ -25,6 +25,11 @@ node {
         stage('Test UI') {
             echo 'Testing...'
         }
+
+        stage('Build Docker Container') {
+            echo 'Building DHS G-28 Form Docker Image...'
+            sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest .'
+        }
     } finally {
         sh 'docker container stop dhsg28-ui-build'
         sh 'docker container rm dhsg28-ui-build'

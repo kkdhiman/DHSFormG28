@@ -118,6 +118,9 @@ node {
                 # Push docker image to ECS Registry
                 docker push ${MASTER_IMAGE_NAME}
 
+                # Tell the Fargate Cluster to update itself with the new image
+                 aws ecs update-service --cluster ${CLUSTER_NAME} --region ${REGION_NAME} --service ${SERVICE_NAME} \
+                 --task-definition ${TASK_DEFINITION_NAME} --desired-count ${NUMBER_OF_INSTANCES}
             '''
 
         }

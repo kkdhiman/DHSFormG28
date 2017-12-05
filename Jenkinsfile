@@ -11,7 +11,7 @@ node {
     }
 
     try {
-        sh 'docker image rm 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form: latest -f'
+        sh 'docker image rm ${MASTER_IMAGE_NAME} -f'
     } catch (e) {
         echo 'Error removing previously tagged image.  Not a big deal.'
     }
@@ -113,14 +113,11 @@ node {
                 ${DOCKER_LOGIN}
 
                 # Push docker image to ECS Registry
-                docker tag g28form:latest 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+                docker tag g28form:latest ${MASTER_IMAGE_NAME}
 
                 # Push docker image to ECS Registry
-                docker push 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
+                docker push ${MASTER_IMAGE_NAME}
 
-                # TODO: Leverage ECS Fargate to run the new image
-                # On Jenkins, configure the latest ecs-cli (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html)
-                /usr/local/bin/ecs-cli images
             '''
 
         }

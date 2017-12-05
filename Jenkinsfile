@@ -3,6 +3,14 @@ node {
     // Clean Workspace
     cleanWs()
 
+    // Clean previously built images
+    try {
+        sh '''
+            docker image rm g28form:latest -f
+            docker image rm 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form: latest -f
+        '''
+    }
+
     stage('Checkout Code') {
         checkout([
             $class: 'GitSCM', 
@@ -106,6 +114,8 @@ node {
                 docker push 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:latest
 
                 # TODO: Leverage ECS Fargate to run the new image
+                # On Jenkins, configure the latest ecs-cli (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html)
+                /usr/local/bin/ecs-cli images
             '''
 
         }

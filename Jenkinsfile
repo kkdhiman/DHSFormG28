@@ -9,6 +9,8 @@ node {
             docker image rm g28form:latest -f
             docker image rm 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form: latest -f
         '''
+    } catch (e) {
+        echo ${e}
     }
 
     stage('Checkout Code') {

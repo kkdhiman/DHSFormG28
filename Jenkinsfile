@@ -112,15 +112,22 @@ node {
                 # Execute ECS Registry login command
                 ${DOCKER_LOGIN}
 
-                # Push docker image to ECS Registry
-                docker tag g28form:latest ${MASTER_IMAGE_NAME}
+                # Build a timestamp for image build
+                ts=`date +"%Y%m%d%H%M%S"`
+                tag=${MASTER_IMAGE_NAME}:${ts}
 
                 # Push docker image to ECS Registry
-                docker push ${MASTER_IMAGE_NAME}
+                docker tag g28form:latest ${tag}
 
-                # Tell the Fargate Cluster to update itself with the new image
-                 aws ecs update-service --cluster ${CLUSTER_NAME} --region ${REGION_NAME} --service ${SERVICE_NAME} \
-                 --task-definition ${TASK_DEFINITION_NAME} --desired-count ${NUMBER_OF_INSTANCES}
+                # Push docker image to ECS Registry
+                docker push ${tag}
+
+                orig="##TAG##"
+                cd /var/lib/jenkins/workspace/DHSFormG28/UI
+                sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose.yml"
+
+                # Refresh cluster with new image in registry
+                ecs-cli compose up
             '''
 
         }

@@ -1,0 +1,12 @@
+version: '2'
+services:
+  dhsformg28-service:
+    image: ##TAG##
+    ports:
+      - "80:80"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: dhsformg28
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: dhsformg28

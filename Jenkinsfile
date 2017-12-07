@@ -128,7 +128,7 @@ node {
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry
-                /usr/local/bin/ecs-cli compose up
+                /usr/local/bin/ecs-cli  --project-name ${CLUSTER_NAME} compose up
 
                 VERSION=`aws ecs describe-task-definition --task-definition UI | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
                 DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`

@@ -7,7 +7,7 @@ task_definition:
     cpu_limit: 256
   services:
     dhsformg28-ui:
-      essential: false
+      essential: true
 run_params:
   network_configuration:
     awsvpc_configuration:

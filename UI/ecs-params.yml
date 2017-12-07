@@ -13,4 +13,3 @@ run_params:
         - "subnet-e512b0ca"
       security_groups:
         - "sg-1958266c"
-      assign_public_ip: ENABLED

@@ -106,15 +106,16 @@ node {
             echo 'Deploying DHSFormG28 Docker Image to ECS...'
 
             sh '''
+                echo ${WORKSPACE}
+
                 # Get the ECS Registry login string
                 DOCKER_LOGIN=`aws ecr get-login --no-include-email --region us-east-1`
 
                 # Execute ECS Registry login command
                 ${DOCKER_LOGIN}
 
-                # Build a timestamp for image build
-                ts=`date +"%Y%m%d%H%M%S"`
-                tag=${MASTER_IMAGE_NAME}:${ts}
+                # Tag Image
+                tag=${MASTER_IMAGE_NAME}:v_${BUILD_NUMBER}
 
                 # Push docker image to ECS Registry
                 docker tag g28form:latest ${tag}
@@ -127,7 +128,16 @@ node {
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry
-                ecs-cli compose up
+                /usr/local/bin/ecs-cli compose up
+
+                VERSION=`aws ecs describe-task-definition --task-definition UI | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+                DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
+                if [ ${DESIRED_COUNT} = "0" ]; then
+                    DESIRED_COUNT="1"
+                fi
+
+                aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} \
+                    --task-definition ${TASK_DEFINITION_NAME}:${VERSION} --desired-count ${DESIRED_COUNT}
             '''
 
         }

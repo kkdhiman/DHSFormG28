@@ -1,6 +1,6 @@
 version: '2'
 services:
-  dhsformg28-service:
+  dhsformg28-ui:
     image: ##TAG##
     ports:
       - "80:80"

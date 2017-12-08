@@ -112,7 +112,7 @@ node {
             sh '''
 
                 # Run our containerized app for pen testing. Run on 8001 since Jenkins is on 80.
-                docker run --name UI -p 8001:80 g28form:latest
+                docker run --name UI -d -p 8001:80 g28form:latest
 
                 # Get the docker container IP
                 APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`

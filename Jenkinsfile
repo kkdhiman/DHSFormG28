@@ -116,7 +116,7 @@ node {
                     docker run --name UI -d -p 8001:80 g28form:latest
 
                     # Get the docker container IP
-                    APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
+                    APP_ID=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
 
                     # Run the pen test and generate an HTML Report.  This container should go away once it
                     # finished it's scan.

@@ -44,6 +44,11 @@ node {
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"'
         }
 
+        stage('Test UI') {
+            // TODO: Run protractor and selenium to test front-end
+            echo 'Testing...'
+        }
+
         stage('OWASP Dependency Security Scan') {
 
             echo('Running OWASP Vulnerability Security Scan on package.json...')
@@ -88,17 +93,49 @@ node {
 
         }
 
-        stage('Test UI') {
-            // TODO: Run protractor and selenium to test front-end
-            echo 'Testing...'
-        }
-
         stage('Build Docker Container') {
             
             echo 'Building DHS G-28 Form Docker Image...'
 
             sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest .'
             
+        }
+
+        stage('OWASP ZAP Container Pen Test') {
+
+            echo 'Penetration testing the application in it''s docker container...'
+
+            // Pull the OWASP ZAP Docker Container
+            sh 'docker pull owasp/zap2docker-stable'
+
+            // Run the app image in a docker container to test
+            sh '''
+
+                # Run our containerized app for pen testing
+                docker run --name UI -p 80:80 g28form:latest
+
+                # Get the docker container IP
+                APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
+
+                # Run the pen test and generate an HTML Report
+                docker run -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
+                    -t http://${APP_ID}:80 -r owasp-report.html
+
+                # Clean Up
+                docker container stop UI
+                docker container rm UI
+
+            '''
+
+            // Publish Pen Test Report
+            publishHTML([
+                allowMissing: false, 
+                alwaysLinkToLastBuild: false, 
+                keepAll: false, 
+                reportDir: 'owasp-report', 
+                reportFiles: 'owasp-report.html', 
+                reportName: 'OWASP ZAP Report', 
+                reportTitles: 'OWASP ZAP Report'])
         }
 
         stage('Deploy to ECS') {

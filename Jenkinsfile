@@ -103,7 +103,7 @@ node {
 
         stage('OWASP ZAP Container Pen Test') {
 
-            echo 'Penetration testing the application in it''s docker container...'
+            echo 'Penetration testing the application in its docker container...'
 
             // Pull the OWASP ZAP Docker Container
             sh 'docker pull owasp/zap2docker-stable'

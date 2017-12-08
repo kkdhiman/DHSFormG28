@@ -1,0 +1,12 @@
+version: '2'
+services:
+  dhsformg28-ui:
+    image: 763465179828.dkr.ecr.us-east-1.amazonaws.com/g28form:20171206192110
+    ports:
+      - "80:80"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: dhsformg28
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: dhsformg28

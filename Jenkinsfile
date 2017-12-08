@@ -109,23 +109,43 @@ node {
             sh 'docker pull owasp/zap2docker-stable'
 
             // Run the app image in a docker container to test
-            sh '''
+            try {
+                sh '''
 
-                # Run our containerized app for pen testing. Run on 8001 since Jenkins is on 80.
-                docker run --name UI -d -p 8001:80 g28form:latest
+                    # Run our containerized app for pen testing. Run on 8001 since Jenkins is on 80.
+                    docker run --name UI -d -p 8001:80 g28form:latest
 
-                # Get the docker container IP
-                APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
+                    # Get the docker container IP
+                    APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
 
-                # Run the pen test and generate an HTML Report
-                docker run -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
-                    -t http://${APP_ID}:8001 -r owasp-report.html
+                    # Run the pen test and generate an HTML Report.  This container should go away once it
+                    # finished it's scan.
+                    docker run --name OWASP -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
+                        -t http://${APP_ID}:8001 -r owasp-report.html
 
-                # Clean Up
-                docker container stop UI
-                docker container rm UI
+                    # Clean Up
+                    docker container stop UI
+                    docker container rm UI
 
-            '''
+                '''
+            } finally {
+                try {
+                    sh 'docker container stop UI'
+                } catch (e) {}
+
+                try {
+                    sh 'docker container rm UI'
+                } catch (e) {}
+
+                try {
+                    sh 'docker container stop OWASP'
+                } catch (e) {}
+
+                try {
+                    sh 'docker container rm OWASP'
+                } catch (e) {}
+
+            }
 
             // Publish Pen Test Report
             publishHTML([

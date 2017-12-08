@@ -118,6 +118,8 @@ node {
                     # Get the docker container IP
                     APP_ID=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
 
+                    sleep 10
+
                     # Run the pen test and generate an HTML Report.  This container should go away once it
                     # finished it's scan.
                     docker run --name OWASP -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \

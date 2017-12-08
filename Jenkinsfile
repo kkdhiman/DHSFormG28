@@ -111,15 +111,15 @@ node {
             // Run the app image in a docker container to test
             sh '''
 
-                # Run our containerized app for pen testing
-                docker run --name UI -p 80:80 g28form:latest
+                # Run our containerized app for pen testing. Run on 8001 since Jenkins is on 80.
+                docker run --name UI -p 8001:80 g28form:latest
 
                 # Get the docker container IP
                 APP_ID==`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
 
                 # Run the pen test and generate an HTML Report
                 docker run -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
-                    -t http://${APP_ID}:80 -r owasp-report.html
+                    -t http://${APP_ID}:8001 -r owasp-report.html
 
                 # Clean Up
                 docker container stop UI

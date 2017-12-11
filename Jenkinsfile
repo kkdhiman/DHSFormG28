@@ -125,7 +125,7 @@ node {
 
                 '''
             } catch (e) {
-                echo e
+                echo 'Error in ZAP Pen Test: ${e}'
             } finally {
                 try {
                     sh 'docker container stop UI'

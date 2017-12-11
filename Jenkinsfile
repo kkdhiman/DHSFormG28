@@ -118,16 +118,14 @@ node {
                     # Get the docker container IP
                     #APP_ID=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
 
-                    try {
-                        # Run the pen test and generate an HTML Report.  This container should go away once it
-                        # finished it's scan.
-                        docker run --name OWASP -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
-                            -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8001 -r owasp-report.html > /dev/null 2>&1
-                    } catch (e) {
-                        echo e
-                    }
+                    # Run the pen test and generate an HTML Report.  This container should go away once it
+                    # finished it's scan.
+                    docker run --name OWASP -v ${WORKSPACE}/owasp-report:/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py \
+                        -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8001 -r owasp-report.html > /dev/null 2>&1
 
                 '''
+            } catch (e) {
+                echo e
             } finally {
                 try {
                     sh 'docker container stop UI'

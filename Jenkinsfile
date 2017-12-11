@@ -145,14 +145,14 @@ node {
             }
 
             // Publish Pen Test Report
-            publishHTML([
-                allowMissing: false, 
-                alwaysLinkToLastBuild: false, 
-                keepAll: false, 
-                reportDir: 'owasp-report', 
-                reportFiles: 'owasp-report.html', 
-                reportName: 'OWASP ZAP Report', 
-                reportTitles: 'OWASP ZAP Report'])
+            //publishHTML([
+            //    allowMissing: false, 
+            //    alwaysLinkToLastBuild: false, 
+            //    keepAll: false, 
+            //    reportDir: 'owasp-report', 
+            //    reportFiles: 'owasp-report.html', 
+            //    reportName: 'OWASP ZAP Report', 
+            //    reportTitles: 'OWASP ZAP Report'])
         }
 
         stage('Deploy to ECS') {

@@ -124,10 +124,6 @@ node {
                         -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8001 -r owasp-report.html \
                         > /dev/null 2>&1
 
-                    # Clean Up
-                    docker container stop UI
-                    docker container rm UI
-
                 '''
             } finally {
                 try {

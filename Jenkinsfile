@@ -45,8 +45,13 @@ node {
         }
 
         stage('Test UI') {
-            // TODO: Run protractor and selenium to test front-end
+
             echo 'Testing...'
+
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;./node_modules/karma/bin/karma start karma-cli.conf.js"'
+
+            // Public Test Results
+            junit allowEmptyResults: true, testResults: 'Phantom*/*.xml'
         }
 
         stage('OWASP Dependency Security Scan') {

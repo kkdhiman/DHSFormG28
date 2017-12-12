@@ -49,10 +49,22 @@ node {
             echo 'Testing...'
 
             // Run Unit Tests
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;./node_modules/karma/bin/karma start karma-cli.conf.js"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm run coverage"'
 
-            // Public Test Results
+            // Publish Test Results
             junit allowEmptyResults: true, testResults: '**/test-results.xml'
+
+            // Publish Code Voerage
+            cobertura autoUpdateHealth: false, 
+                autoUpdateStability: false, 
+                coberturaReportFile: 'coverage/cobertura-coverage.xml', 
+                conditionalCoverageTargets: '70, 0, 0', 
+                failUnhealthy: false, 
+                failUnstable: false, 
+                lineCoverageTargets: '80, 0, 0', 
+                maxNumberOfBuilds: 0, 
+                methodCoverageTargets: '80, 0, 0', 
+                sourceEncoding: 'ASCII'
         }
 
         stage('OWASP Dependency Security Scan') {

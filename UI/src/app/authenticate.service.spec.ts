@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AuthenticateService } from './authenticate.service';
 
 describe('AuthenticateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthenticateService]
+      providers: [AuthenticateService],
+      imports: [HttpClientModule]
     });
   });
 

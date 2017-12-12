@@ -51,7 +51,7 @@ node {
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;./node_modules/karma/bin/karma start karma-cli.conf.js"'
 
             // Rename test results directory
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;mv 'PhantomJS_2_1_1_(Linux_0_0_0)' UI-Unit-Tests"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;mv PhantomJS* UI-Unit-Tests"'
 
             // Public Test Results
             junit allowEmptyResults: true, testResults: '**/test-results.xml'

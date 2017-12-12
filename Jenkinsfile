@@ -51,7 +51,7 @@ node {
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;./node_modules/karma/bin/karma start karma-cli.conf.js"'
 
             // Public Test Results
-            junit allowEmptyResults: true, testResults: 'Phantom*/*.xml'
+            junit allowEmptyResults: true, testResults: '**/test-results.xml'
         }
 
         stage('OWASP Dependency Security Scan') {

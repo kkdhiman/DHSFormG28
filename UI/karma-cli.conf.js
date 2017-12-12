@@ -14,7 +14,7 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reports: [ 'cobertura', 'lcovonly' ],
       fixWebpackSourcePaths: true
     },
     angularCli: {

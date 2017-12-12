@@ -57,7 +57,7 @@ node {
             // Publish Code Voerage
             cobertura autoUpdateHealth: false, 
                 autoUpdateStability: false, 
-                coberturaReportFile: 'coverage/cobertura-coverage.xml', 
+                coberturaReportFile: '**/UI/coverage/cobertura-coverage.xml', 
                 conditionalCoverageTargets: '70, 0, 0', 
                 failUnhealthy: false, 
                 failUnstable: false, 

@@ -35,7 +35,7 @@ node {
                 -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app node:7'
 
             // Install angular ci so we can use 'ng' command in next step
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli"'
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli; npm i -g karma;npm i -g nyc"'
 
             // Run npm install in the docker container
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'

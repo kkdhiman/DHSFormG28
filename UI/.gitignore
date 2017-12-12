@@ -40,3 +40,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+PhantomJS_2.1.1_(Windows_8_0.0.0)

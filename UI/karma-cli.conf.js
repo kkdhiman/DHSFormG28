@@ -22,7 +22,9 @@ module.exports = function (config) {
     },
     reporters: ['dots', 'junit'],
     junitReporter: {
-      outputFile: 'test-results.xml'
+      outputDir: 'UI-Unit-Tests',
+      outputFile: 'test-results.xml',
+      suite: 'UI-Unit-Tests',
     },
     browsers:  ['PhantomJS'],
     autoWatch: false,

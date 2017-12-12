@@ -61,7 +61,12 @@
       "dist/**/*.js"
     ],
     "exclude": [
-      "src/**/*.spec.js"
+      "src/**/*.spec.js",
+      "dist/inline.bundle.js",
+      "dist/main.bundle.js",
+      "dist/polyfills.bundle.js",
+      "dist/styles.bundle.js",
+      "dist/vendor.bundle.js"
     ],
     "reporter": [
       "cobertura",

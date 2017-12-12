@@ -22,7 +22,6 @@ module.exports = function (config) {
     },
     reporters: ['dots', 'junit'],
     junitReporter: {
-      outputDir: 'UI-Unit-Tests',
       outputFile: 'test-results.xml',
       suite: 'UI-Unit-Tests',
     },

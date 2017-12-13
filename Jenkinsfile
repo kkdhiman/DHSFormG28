@@ -61,7 +61,7 @@ node {
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm run coverage"'
 
             // Publish Test Results
-            junit allowEmptyResults: true, testResults: '**/*-result.xml'
+            junit allowEmptyResults: true, testResults: '**/*-results.xml'
 
             // Publish Unit Test Code Coverage
             cobertura autoUpdateHealth: false, 

@@ -33,17 +33,27 @@ node {
 
             // Pull the pre-built UI code build and test docker image.  This image also has Google
             // Chrome installed for headless e2e testing.
-            sh 'docker pull ${PRE_BUILT_BUILD_TEST_IMAGE}'
+            sh '''
+            
+                # Get the ECS Registry login string
+                DOCKER_LOGIN=`aws ecr get-login --no-include-email --region us-east-1`
 
-            // Run the pre-buit build image in a container that mounts the source directory
-            sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}'
+                # Execute ECS Registry login command
+                ${DOCKER_LOGIN}
 
-            // Run npm install in the docker container
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'
+                docker pull ${PRE_BUILT_BUILD_TEST_IMAGE}'
 
-            // Build artifacts
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"'
+                # Run the pre-buit build image in a container that mounts the source directory
+                sh 'docker run -it -d --name="dhsg28-ui-build" \
+                    -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}'
+
+                # Run npm install in the docker container
+                sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'
+
+                # Build artifacts
+                sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"'
+
+            '''
         }
 
         stage('Test UI') {
@@ -185,14 +195,6 @@ node {
             echo 'Deploying DHSFormG28 Docker Image to ECS...'
 
             sh '''
-                echo ${WORKSPACE}
-
-                # Get the ECS Registry login string
-                DOCKER_LOGIN=`aws ecr get-login --no-include-email --region us-east-1`
-
-                # Execute ECS Registry login command
-                ${DOCKER_LOGIN}
-
                 # Tag Image
                 tag=${MASTER_IMAGE_NAME}:v_${BUILD_NUMBER}
 

@@ -9,13 +9,16 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: [ "--headless", "--disable-gpu", "--window-size=800x600" ]
+    },
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
+  framework: 'jasmine2',
   jasmineNodeOpts: {
-    showColors: true,
+    showColors: false,
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
@@ -23,6 +26,16 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  }
+    var jasmineReporters = require('jasmine-reporters');
+    jasmine.getEnv().addReporter(
+      new jasmineReporters.JUnitXmlReporter({
+        consolidateAll: true,
+        savePath: 'e2e-test-results',
+        filePrefix: 'e2e-results',
+        consolidateAll: true
+      })
+    );
+    //jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+  },
+  colors: false
 };

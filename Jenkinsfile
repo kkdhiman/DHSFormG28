@@ -30,12 +30,14 @@ node {
     // project specific artifacts on the Jenkins server itself.
     try {
         stage('Build UI') { 
-            // TODO: Make these first three steps obsolete by creating a custom image.
-            sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app node:7'
 
-            // Install angular ci so we can use 'ng' command in next step
-            sh 'docker exec dhsg28-ui-build /bin/bash -c "npm install -g @angular/cli; npm i -g karma;npm i -g nyc"'
+            // Pull the pre-built UI code build and test docker image.  This image also has Google
+            // Chrome installed for headless e2e testing.
+            sh 'docker pull ${PRE-BUILT_BUILD_TEST_IMAGE}'
+
+            // Run the pre-buit build image in a container that mounts the source directory
+            sh 'docker run -it -d --name="dhsg28-ui-build" \
+                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE-BUILT_BUILD_TEST_IMAGE}'
 
             // Run npm install in the docker container
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'
@@ -46,7 +48,7 @@ node {
 
         stage('Test UI') {
 
-            echo 'Testing...'
+            echo 'Unit Testing...'
 
             // Run Unit Tests
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm run coverage"'
@@ -54,7 +56,7 @@ node {
             // Publish Test Results
             junit allowEmptyResults: true, testResults: '**/test-results.xml'
 
-            // Publish Code Voerage
+            // Publish Unit Test Code Coverage
             cobertura autoUpdateHealth: false, 
                 autoUpdateStability: false, 
                 coberturaReportFile: '**/UI/coverage/cobertura-coverage.xml', 
@@ -65,6 +67,10 @@ node {
                 maxNumberOfBuilds: 0, 
                 methodCoverageTargets: '80, 0, 0', 
                 sourceEncoding: 'ASCII'
+
+            echo 'E2E Testing...'
+
+            sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm run e2e"'
         }
 
         stage('OWASP Dependency Security Scan') {
@@ -115,7 +121,7 @@ node {
             
             echo 'Building DHS G-28 Form Docker Image...'
 
-            sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest .'
+            sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest -f ./docker/container/Dockerfile .'
             
         }
 

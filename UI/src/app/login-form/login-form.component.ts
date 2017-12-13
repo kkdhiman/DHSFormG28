@@ -10,7 +10,7 @@ import { AuthenticateService } from '../authenticate.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-
+  title = 'DHS Form G-28 Prototype';
   constructor(private authService: AuthenticateService, private router: Router) { }
 
   user = new User('', '', false, '');

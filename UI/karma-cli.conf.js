@@ -6,13 +6,15 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
-      require('karma-phantomjs-launcher'),
+      //require('karma-phantomjs-launcher'),
+      require('karma-chrome-launcher'),
       require('karma-jasmine'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('karma-junit-reporter'),
       require('@angular/cli/plugins/karma')
     ],
+    port: 9876,  // karma web server port
     coverageIstanbulReporter: {
       reports: [ 'cobertura', 'lcovonly' ],
       fixWebpackSourcePaths: true
@@ -25,7 +27,7 @@ module.exports = function (config) {
       outputFile: 'test-results.xml',
       suite: 'UI-Unit-Tests',
     },
-    browsers:  ['PhantomJS'],
+    browsers:  ['ChromeHeadless'],
     autoWatch: false,
     colors: false,
     logLevel: config.LOG_INFO,

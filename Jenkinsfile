@@ -33,11 +33,11 @@ node {
 
             // Pull the pre-built UI code build and test docker image.  This image also has Google
             // Chrome installed for headless e2e testing.
-            sh 'docker pull ${PRE-BUILT_BUILD_TEST_IMAGE}'
+            sh 'docker pull ${PRE_BUILT_BUILD_TEST_IMAGE}'
 
             // Run the pre-buit build image in a container that mounts the source directory
             sh 'docker run -it -d --name="dhsg28-ui-build" \
-                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE-BUILT_BUILD_TEST_IMAGE}'
+                -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}'
 
             // Run npm install in the docker container
             sh 'docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"'

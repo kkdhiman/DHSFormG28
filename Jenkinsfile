@@ -50,9 +50,6 @@ node {
                 # Run npm install in the docker container
                 docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"
 
-                # Build artifacts
-                docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"
-
             '''
         }
 
@@ -131,7 +128,17 @@ node {
             
             echo 'Building DHS G-28 Form Docker Image...'
 
-            sh 'cd /var/lib/jenkins/workspace/DHSFormG28/UI; docker build -t g28form:latest -f ./docker/container/Dockerfile .'
+            sh '''
+                # Build UI artifacts
+                docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"
+            
+                # Change directory to UI
+                cd /var/lib/jenkins/workspace/DHSFormG28/UI
+                
+                # Build the UI Docker Image
+                docker build -t g28form:latest -f ./docker/container/Dockerfile .
+
+            '''
             
         }
 

@@ -1,9 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
+import { User } from './user';
 import { AuthenticateService } from './authenticate.service';
 
 describe('AuthenticateService', () => {
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthenticateService],
@@ -14,4 +16,5 @@ describe('AuthenticateService', () => {
   it('should be created', inject([AuthenticateService], (service: AuthenticateService) => {
     expect(service).toBeTruthy();
   }));
+
 });

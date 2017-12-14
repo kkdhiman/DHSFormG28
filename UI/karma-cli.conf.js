@@ -6,31 +6,33 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
-      //require('karma-phantomjs-launcher'),
-      require('karma-chrome-launcher'),
       require('karma-jasmine'),
+      require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('karma-junit-reporter'),
       require('@angular/cli/plugins/karma')
     ],
-    port: 9876,  // karma web server port
+    client:{
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
+    },
     coverageIstanbulReporter: {
-      reports: [ 'cobertura', 'lcovonly' ],
+      reports: [ 'cobertura', 'lcovonly', 'html' ],
       fixWebpackSourcePaths: true
     },
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['dots', 'junit'],
+    reporters: ['progress', 'kjhtml', 'dots', 'junit'],
     junitReporter: {
       outputFile: 'test-results.xml',
       suite: 'UI-Unit-Tests',
     },
-    browsers:  ['ChromeHeadless'],
-    autoWatch: false,
+    port: 9876,
     colors: false,
     logLevel: config.LOG_INFO,
+    autoWatch: false,
+    browsers: ['ChromeHeadless'],
     singleRun: true,
     customLaunchers: {
       ChromeHeadless: {

@@ -42,6 +42,7 @@ testem.log
 Thumbs.db
 
 PhantomJS_2.1.1_(Windows_8_0.0.0)
+HeadlessChrome_0.0.0_(Windows_10_0.0.0)
 
 .nyc_output/
 

@@ -7,3 +7,15 @@
 .login-button {
     width: 200px;
 }
+
+.envtitle {
+    font-size: 16px;
+    color: #c22a4b;
+    font-style: oblique bold;
+    text-align: top;
+    padding-top: 40px;
+}
+
+.centerDIV {
+    text-align:center;
+}

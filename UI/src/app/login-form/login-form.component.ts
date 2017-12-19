@@ -10,13 +10,19 @@ import { AuthenticateService } from '../authenticate.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
+
   title = 'DHS Form G-28 Prototype';
-  constructor(private authService: AuthenticateService, private router: Router) { }
+  environment = process.env['DHS_G28_ENV'];
+
+  constructor(private authService: AuthenticateService, private router: Router) {
+
+  }
 
   user = new User('', '', false, '');
 
   ngOnInit() {
     this.checkIfUserAuthenticated();
+    this.environment = process.env['DHS_G28_ENV'] || '** DEV Environment **';
   }
 
   onLogin() {
@@ -25,16 +31,24 @@ export class LoginFormComponent implements OnInit {
     console.log(JSON.stringify(this.authService.authenticateUser(this.user)));
 
     if (this.user.authenticated === true) {
-      localStorage.setItem('G28User', JSON.stringify(this.user));
+      try {
+        localStorage.setItem('G28User', JSON.stringify(this.user));
+      } catch (e) {}
       this.router.navigate(['/form']);
     } else {
-      localStorage.removeItem('G28User');
-      this.router.navigate(['/']);
+      try {
+        localStorage.removeItem('G28User');
+      } catch (e) {}
+      // this.router.navigate(['/']);
     }
   }
 
   checkIfUserAuthenticated() {
-    const currentUser = JSON.parse(localStorage.getItem('G28User'));
+    let authData = '{}';
+    try {
+      authData = localStorage.getItem('G28User');
+    } catch (e) {}
+    const currentUser = JSON.parse(authData);
     if (currentUser !== null && currentUser.authenticated === true) {
       this.router.navigate(['/form']);
     }

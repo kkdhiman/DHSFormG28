@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     G28FormComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'ui'}),
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(

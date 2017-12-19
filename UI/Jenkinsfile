@@ -45,7 +45,7 @@ node {
 
                 # Run the pre-buit build image in a container that mounts the source directory
                 docker run -it -d --name="dhsg28-ui-build" \
-                    -v /var/lib/jenkins/workspace/DHSFormG28/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}
+                    -v /var/lib/jenkins/workspace/DHSFormG28-UI/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}
 
                 # Run npm install in the docker container
                 docker exec dhsg28-ui-build /bin/bash -c "cd /app;npm install"
@@ -133,7 +133,7 @@ node {
                 docker exec dhsg28-ui-build /bin/bash -c "cd /app;ng build"
             
                 # Change directory to UI
-                cd /var/lib/jenkins/workspace/DHSFormG28/UI
+                cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI
                 
                 # Build the UI Docker Image
                 docker build -t g28form:latest -f ./docker/container/Dockerfile .
@@ -212,7 +212,7 @@ node {
                 docker push ${tag}
 
                 orig="##TAG##"
-                cd /var/lib/jenkins/workspace/DHSFormG28/UI
+                cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry

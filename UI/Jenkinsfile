@@ -212,7 +212,7 @@ node {
                 docker push ${tag}
 
                 orig="##TAG##"
-                cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI
+                cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI/docker/deploy
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry

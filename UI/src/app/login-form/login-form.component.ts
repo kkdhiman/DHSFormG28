@@ -12,7 +12,9 @@ import { AuthenticateService } from '../authenticate.service';
 export class LoginFormComponent implements OnInit {
 
   title = 'DHS Form G-28 Prototype';
-  environment = process.env['DHS_G28_ENV'];
+
+  // TODO: Update this value from an http call to the configuration service
+  environment = '** DEV Environment **';
 
   constructor(private authService: AuthenticateService, private router: Router) {
 
@@ -22,7 +24,6 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit() {
     this.checkIfUserAuthenticated();
-    this.environment = process.env['DHS_G28_ENV'] || '** DEV Environment **';
   }
 
   onLogin() {
@@ -39,7 +40,7 @@ export class LoginFormComponent implements OnInit {
       try {
         localStorage.removeItem('G28User');
       } catch (e) {}
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 

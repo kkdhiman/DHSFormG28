@@ -3,19 +3,6 @@ node {
     // Clean Workspace
     cleanWs()
 
-    // Clean previously built images
-    try {
-        sh 'docker image rm g28form:latest -f'
-    } catch (e) {
-        echo 'Error removing previously generated image.  Not a big deal.'
-    }
-
-    try {
-        sh 'docker image rm ${MASTER_IMAGE_NAME} -f'
-    } catch (e) {
-        echo 'Error removing previously tagged image.  Not a big deal.'
-    }
-
     stage('Checkout Code') {
         checkout([
             $class: 'GitSCM', 
@@ -31,8 +18,8 @@ node {
     try {
 
         stage('Build API Docker Image') {
-            # Build the UI Docker Image
-            sh 'docker build -t g28form-api:latest -f ./docker/container/Dockerfile .'
+            // Build the UI Docker Image
+            sh 'docker build -t ${IMAGE_NAME} -f ./docker/container/Dockerfile .'
         }
 
         stage('Deploy to ECS') {
@@ -47,10 +34,10 @@ node {
                 ${DOCKER_LOGIN}
 
                 # Tag Image
-                tag=${MASTER_IMAGE_NAME}:v_${BUILD_NUMBER}
+                tag=${MASTER_IMAGE_NAME}-v_${BUILD_NUMBER}
 
                 # Push docker image to ECS Registry
-                docker tag g28form-api:latest ${tag}
+                docker tag ${IMAGE_NAME} ${tag}
 
                 # Push docker image to ECS Registry
                 docker push ${tag}
@@ -77,7 +64,11 @@ node {
 
         }
     } finally {
-        sh 'docker container stop dhsg28-ui-build'
-        sh 'docker container rm dhsg28-ui-build'
+        // Clean previously built images
+        try {
+            sh 'docker image prune -f'
+        } catch (e) {
+            echo 'Error removing previously generated image.  Not a big deal.'
+        }
     }
 }

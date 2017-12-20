@@ -1,0 +1,12 @@
+version: '2'
+services:
+  dhsformg28-api:
+    image: ##TAG##
+    ports:
+      - "3000:3000"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: dhsformg28
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: dhsformg28

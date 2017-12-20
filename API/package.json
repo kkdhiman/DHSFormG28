@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "JSON REST interface for the DHS Form G28 UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "DHS",
+    "G28",
+    "Form"
+  ],
+  "author": "James Caple",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.16.2"
+  }
+}

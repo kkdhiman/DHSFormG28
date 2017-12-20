@@ -19,7 +19,10 @@ node {
 
         stage('Build API Docker Image') {
             // Build the UI Docker Image
-            sh 'docker build -t ${IMAGE_NAME} -f ./docker/container/Dockerfile .'
+            sh '''
+                cd /var/lib/jenkins/workspace/DHSFormG28-API/API
+                docker build -t ${IMAGE_NAME} -f ./docker/container/Dockerfile .
+            '''
         }
 
         stage('Deploy to ECS') {

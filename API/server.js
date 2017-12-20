@@ -11,4 +11,4 @@ let CONFIG = {
 
 app.get('/', (req, res) => res.send(JSON.stringify(CONFIG)));
 
-app.listen(3000, () => console.log('Configuration Server listening on port 3000!'))
+app.listen(3000, () => console.log('Server listening on port 3000!'))

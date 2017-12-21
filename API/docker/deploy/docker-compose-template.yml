@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DHS_G28_ENV=DEV
+      - DHS_G28_ENV=##ENV##
     logging:
       driver: awslogs
       options: 

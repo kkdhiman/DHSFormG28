@@ -49,9 +49,10 @@ node {
                 cd /var/lib/jenkins/workspace/DHSFormG28-API/API/docker/deploy
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose-temp.yml"
 
-                ENV=DEV
-                ENV_TAG="##ENV##"
-                sed "s~$ENV~$ENV_TAG~g" "docker-compose-temp.yml" > "docker-compose.yml" 
+                env_tag="##ENV##"
+                env_val="DEV"
+
+                sed "s~$env_tag~$env_val~g" "docker-compose-temp.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry
                 /usr/local/bin/ecs-cli compose --project-name ${TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}

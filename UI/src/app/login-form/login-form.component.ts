@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../user';
 import { AuthenticateService } from '../authenticate.service';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,13 +17,14 @@ export class LoginFormComponent implements OnInit {
   // TODO: Update this value from an http call to the configuration service
   environment = '** DEV Environment **';
 
-  constructor(private authService: AuthenticateService, private router: Router) {
+  constructor(private configService: ConfigService, private authService: AuthenticateService, private router: Router) {
 
   }
 
   user = new User('', '', false, '');
 
   ngOnInit() {
+    this.getEnvironment();
     this.checkIfUserAuthenticated();
   }
 
@@ -53,6 +55,20 @@ export class LoginFormComponent implements OnInit {
     if (currentUser !== null && currentUser.authenticated === true) {
       this.router.navigate(['/form']);
     }
+  }
+
+  getEnvironment() {
+    this.configService.getEnvConfig().then((config) => {
+      if (config['DHS_G28_ENV'] !== null) {
+        if (config['DHS_G28_ENV'] === 'PROD') {
+          this.environment = '** PROD Environment **';
+        } else if (config['DHS_G28_ENV'] === 'DEV') {
+          this.environment = '** DEV Environment **';
+        }
+      }
+    }).catch((err) => {
+      this.environment = '!! Unable To Contact Config Service !!';
+    });
   }
 
 }

@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { AuthenticateService } from './authenticate.service';
+import { ConfigService } from './config.service';
 import { G28FormComponent } from './g28-form/g28-form.component';
 
 const appRoutes: Routes = [
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [AuthenticateService],
+  providers: [AuthenticateService, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,8 @@ services:
     image: ##TAG##
     ports:
       - "3000:3000"
+    environment:
+      - G28_APP_ENV=DEV
     logging:
       driver: awslogs
       options: 

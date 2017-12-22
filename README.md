@@ -12,13 +12,27 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 - OS: win32 x64
 - Angular: 5x
 
+### Running API For Development
+1.  cd API
+1.  npm install
+1.  Set the 'DHS_G28_ENV' environment variable per environment:
+    1.  export DHS_G28_ENV=DEV
+1.  npm run server
+
+### Running API In Docker
+1.  cd API
+1.  docker build -t dhsformg28-api:latest -f ./docker/container/Dockerfile .
+1.  Set the 'DHS_G28_ENV' environment variable per environment:
+    1.  export DHS_G28_ENV=DEV
+1.  docker run -p 3000:3000 -e DHS_G28_ENV dhsformg28-api:latest
+
 ### Running UI For Development
 1.  cd UI
 1.  npm install
 1.  ng serve --open
 
-### Building and Running UI in Docker
+### Building and Running UI In Docker
 1.  cd UI
 1.  ng build
-1.  docker build -t g28form .
-1.  docker run -p 8000:80 g28form
+1.  docker build -f docker/container/Dockerfile -t g28form:latest .
+1.  docker run -p 8000:80 g28form:latest

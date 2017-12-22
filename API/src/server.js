@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 // Collection app settings from environment
-const G28_APP_ENV = process.env['DHS_G28_ENV'] || 'undefined';
+const G28_APP_ENV = process.env['DHS_G28_ENV'] || 'DEV';
 
 // Make configuration settings available as JSON String
 let CONFIG = {

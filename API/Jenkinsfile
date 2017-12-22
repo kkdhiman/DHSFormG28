@@ -1,5 +1,14 @@
 node {
 
+    // NOTE the following required environment variables needed in Jenkins for
+    // running this pipeline:
+    //
+    // MASTER_IMAGE_NAME - The API tag for the ECS Repository.  Version number of the build will be appended to this.
+    // IMAGE_NAME - Docker Image Name to give to the image this is building.
+    // CLUSTER_NAME - Name of the ECS Fargate Cluster to deploy to.
+    // TASK_DEFINITION_NAME - Fargate Service Task Def. Name
+    // SERVICE_NAME - Fargate Service Name
+
     // Clean Workspace
     cleanWs()
 
@@ -59,7 +68,7 @@ node {
 
                 VERSION=`aws ecs describe-task-definition --task-definition ${TASK_DEFINITION_NAME} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
                 
-                # TODO: use JP to parse JSON to get this value instead of egrep
+                # TODO: use jq to parse JSON to get this value instead of egrep
                 #DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} --cluster ${CLUSTER_NAME} | egrep "desiredCount" | tr "/" " " | awk '{print $2}' | sed 's/,$//'`
                 DESIRED_COUNT=1
                 #if [ ${DESIRED_COUNT} = "0" ]; then

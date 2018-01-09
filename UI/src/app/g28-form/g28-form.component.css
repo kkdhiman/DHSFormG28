@@ -4,21 +4,18 @@
 }
 
 .headerRow {
-    display:inline-block;
     text-align:center;
     vertical-align:middle;
     float:none;
 }
 
 .headerLeft {
-    display:inline-block;
-    text-align: center;
+    float:left;
     vertical-align: bottom;
 }
 
 .headerRight {
-    display:inline-block;
-    text-align: center;
+    float:right;
     vertical-align: bottom;
 }
 
@@ -26,4 +23,14 @@
     text-align:center;
     border-bottom: 3px solid;
     margin-top: 5px;
+}
+
+#formBody {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.formItemRow {
+    padding: 10px;
+    margin-bottom: 5px;
 }

@@ -1,0 +1,29 @@
+#header {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.headerRow {
+    display:inline-block;
+    text-align:center;
+    vertical-align:middle;
+    float:none;
+}
+
+.headerLeft {
+    display:inline-block;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.headerRight {
+    display:inline-block;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.line {
+    text-align:center;
+    border-bottom: 3px solid;
+    margin-top: 5px;
+}

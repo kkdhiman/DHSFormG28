@@ -11,7 +11,7 @@ export class G28FormComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.checkIfUserAuthenticated();
+    // this.checkIfUserAuthenticated();
   }
 
   checkIfUserAuthenticated() {

@@ -33,6 +33,11 @@
     text-align: center;
 }
 
+.formRow {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
 .formItemRow {
     padding: 10px;
     margin-bottom: 5px;

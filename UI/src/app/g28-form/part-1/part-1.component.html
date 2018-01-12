@@ -1,17 +1,90 @@
 
 <div class="container border">
   <div class="row form-row">
-    <div>
+    <div class="col-md-4 text-left">
       <span class="label">1.  USCIS ELIS Account Number <em>(if any)</em>:</span>
     </div>
-    <div class="form1-field">
+    <div class="form1-field col-md-8 text-left">
       <input type="number" max="999999999999" maxlength="12" id="elis_number"/>
     </div>
   </div>
 
   <div class="row">
-    <div class="form-heading text-center">
+    <div class="form-heading text-center col-md-6">
       Name and Address of Attorney or Accredited Representative
     </div>
   </div>
+
+  <div class="row form-row">
+    <div class="col-md-4 text-left">
+      <span class="label">2.a.  Family Name <em>(Last Name)</em>:</span>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="last_name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-4 text-left">
+      <span class="label">2.b.  Given Name <em>(First Name)</em>:</span>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="first_name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-4 text-left">
+      <span class="label">2.c.  Middle Name:</span>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="middle_name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-4 text-left">
+      <span class="label">3.a.  Street Number and Name:</span>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="street_number_name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-1 text-left">
+      <span class="label">3.b.</span>
+    </div>
+    <div class="col-md-1 radio text-left">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios1" value="apt" checked>
+        Apt.
+      </label>
+    </div>
+    <div class="col-md-1 radio text-left">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios2" value="ste" checked>
+        Ste.
+      </label>
+    </div>
+    <div class="col-md-1 radio text-left">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios3" value="flr" checked>
+        Flr.
+      </label>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="street_number_name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-4 text-left">
+      <span class="label">3.c.  City or Town:</span>
+    </div>
+    <div class="form1-field col-md-8 text-left">
+      <input type="text" maxlength="40" id="city_town"/>
+    </div>
+  </div>
+
 </div>

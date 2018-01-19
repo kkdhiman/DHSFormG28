@@ -29,7 +29,7 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 ### Running UI For Development
 1.  cd UI
 1.  npm install
-1.  ng serve --open
+1.  ng serve --open | ng serve --host=0.0.0.0 --open (makes access from mobile emulator easier)
 
 ### Building and Running UI In Docker
 1.  cd UI

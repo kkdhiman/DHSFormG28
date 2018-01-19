@@ -10,6 +10,10 @@
 
 .form1-field {
     text-align: left;
+    display: block;
+    width: 100%;
+    min-height: 28px;
+    min-width: 100%!important;
 }
 
 .form-heading {

@@ -1,3 +1,320 @@
-<p>
-  ** TODO!
-</p>
+<div class="container-fluid border">
+
+  <div class="row">
+      <div class="text-left col">
+        This appearance relates to immigration matters before <em>(Select <b>only one</b> box):</em>
+      </div>
+  </div>
+
+  <!-- USCIS -->
+  <div class="row form-row text-left">
+    <div class="col-md-1 text-left">
+      <span class="label">1.a.</span>
+    </div>
+    <div class="col-md-1 radio text-left" title="USCIS">
+      <label>
+        <input type="radio" name="optionsPart2A" id="optionsPart2A1" value="uscis" checked title="USCIS">
+        USCIS
+      </label>
+    </div>
+    <div class="col-md-4 text-left">
+      <span class="label">1.b.  List the form numbers</span>
+    </div>
+    <div class="col-md-6 text-left">
+      <input type="text" maxlength="40" id="uscis_form_numbers" class="form2-field"
+        title="Please enter the USCIS Form Numbers"/>
+    </div>
+  </div>
+
+  <!-- ICE -->
+  <div class="row form-row text-left">
+    <div class="col-md-1 text-left">
+      <span class="label">2.a.</span>
+    </div>
+    <div class="col-md-1 radio text-left" title="ICE">
+      <label>
+        <input type="radio" name="optionsPart2A" id="optionsPart2A2" value="ice" title="ICE">
+        ICE
+      </label>
+    </div>
+    <div class="col-md-4 text-left">
+      <span class="label">2.b.  List the specific matter in which appearance is entered</span>
+    </div>
+    <div class="col-md-6 text-left">
+      <input type="text" maxlength="40" id="ice_appearance" class="form2-field"
+        title="Please enter the specific matter in which appearance is entered"/>
+    </div>
+  </div>
+
+  <!-- CBP -->
+  <div class="row form-row text-left">
+    <div class="col-md-1 text-left">
+      <span class="label">3.a.</span>
+    </div>
+    <div class="col-md-1 radio text-left" title="ICE">
+      <label>
+        <input type="radio" name="optionsPart2A" id="optionsPart2A3" value="cbp" title="CBP">
+        CBP
+      </label>
+    </div>
+    <div class="col-md-4 text-left">
+      <span class="label">3.b.  List the specific matter in which appearance is entered</span>
+    </div>
+    <div class="col-md-6 text-left">
+      <input type="text" maxlength="40" id="cbp_appearance" class="form2-field"
+        title="Please enter the specific matter in which appearance is entered"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left sectionTitle">
+    I enter my appearance as attorney or accredited representative at the request of:
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-4 text-left">
+        <span class="label">4.  Select one of the following:</span>
+    </div>
+    <div class="col-md-2 radio text-left" title="Applicant">
+      <label>
+        <input type="radio" name="optionsPart2B" id="optionsPart2B1" value="applicant" title="Applicant">
+        Applicant
+      </label>
+    </div>
+    <div class="col-md-2 radio text-left" title="Petitioner">
+      <label>
+        <input type="radio" name="optionsPart2B" id="optionsPart2B2" value="petitioner" title="Petitioner">
+        Petitioner
+      </label>
+    </div>
+    <div class="col-md-2 radio text-left" title="Requestor">
+      <label>
+        <input type="radio" name="optionsPart2B" id="optionsPart2B2" value="requestor" title="Requestor">
+        Requestor
+      </label>
+    </div>
+    <div class="col-md-2 radio text-left" title="Respondent">
+      <label>
+        <input type="radio" name="optionsPart2B" id="optionsPart2B3" value="respondent" title="Respondent">
+        Respondent (ICE, CBP)
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-heading text-center col"
+      title="Section: Information About Applicant, Petitioner, Requestor, or Respondent">
+      Information About Applicant, Petitioner, Requestor, or Respondent
+    </div>
+  </div>
+
+  <div class="row form-row">
+    <div class="col text-left">
+      <span class="label">5.a.  Family Name<em>(Last Name)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="80" id="part2_last_name" class="form2-field"
+        title="Please enter your Family Name (Last Name)"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">5.b.  Given Name <em>(First Name)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_first_name" class="form2-field"
+        title="Please enter your Given Name (First Name)"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">5.c.  Middle Name:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_middle_name" class="form2-field"
+        title="Please enter your Middle Name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">6.  Name of Company or Organization <em>(if applicable)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_org_name" class="form2-field"
+        title="Name of Company or Organization"/>
+    </div>
+  </div>
+
+  <div class="row form-row">
+    <div class="col-md-4 text-left">
+      <span class="label">7.  USCIS ELIS Account Number <em>(if any)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="number" max="999999999999" maxlength="12" id="part2_elis_number" class="form2-field" 
+        title="Please enter your USCIS ELIS Account Number" />
+    </div>
+  </div>  
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">8.  Alien Registration Number (A-Number) or Receipt Number:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_anumber" class="form2-field"
+        title="Alien Registration Number"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">9.  Daytime Telephone Number:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_phone_number" class="form2-field"
+        title="Daytime Telephone Number"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">10.  Mobile Telephone Number <em>(if any)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_mobile_phone_number" class="form2-field"
+        title="Mobile Telephone Number"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">11.  E-Mail Address <em>(if any)</em>:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_email" class="form2-field"
+        title="Email"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-heading text-center col"
+      title="Section: Mailing Address of Applicant, Petitioner, Requestor, or Respondent">
+      Mailing Address of Applicant, Petitioner, Requestor, or Respondent
+    </div>
+  </div>
+
+  <div class="row form-row text-left sectionTitle">
+    NOTE: Provide the mailing address of the applicant, petitioner, requestor, or respondent.
+    Do not provide the business mailing address of the attorney or accredited representative unless it 
+    serves as the safe mailing address on the application, petition or request being filed with this Form G-28.
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.a.  Street Number and Name:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_number_name" class="form2-field"
+        title="Street Number and Name"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col-md-1 text-left">
+      <span class="label">12.b.</span>
+    </div>
+    <div class="col-md-1 radio text-left" title="Please select your address type">
+      <label>
+        <input type="radio" name="optionsPart2C" id="optionsPart2C1" value="apt" checked title="Apartment">
+        Apt.
+      </label>
+    </div>
+    <div class="col-md-1 radio text-left">
+      <label>
+        <input type="radio" name="optionsPart2C" id="optionsPart2C2" value="ste" title="Suite">
+        Ste.
+      </label>
+    </div>
+    <div class="col-md-1 radio text-left">
+      <label>
+        <input type="radio" name="optionsPart2C" id="optionsPart2C3" value="flr" title="Floor">
+        Flr.
+      </label>
+    </div>
+    <div class="col-md-8 text-left">
+        <input type="text" maxlength="40" id="part2_suite_number" class="form2-field"
+        title="Apartment/Suite/Floor Number"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.c.  City or Town:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_city_town" class="form2-field"
+        title="City or Town"/>
+    </div>
+  </div> 
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.d.  State:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_state" class="form2-field"
+        title="State"/>
+    </div>
+  </div>
+  
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.e.  Zip:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_zip" class="form2-field"
+        title="Zip"/>
+    </div>
+  </div> 
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.f.  Province:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_province" class="form2-field"
+        title="Province"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.g.  Postal Code:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_postal" class="form2-field"
+        title="Postal Code"/>
+    </div>
+  </div>
+
+  <div class="row form-row text-left">
+    <div class="col text-left">
+      <span class="label">12.h.  Country:</span>
+    </div>
+    <div class="col-md-8 text-left">
+      <input type="text" maxlength="40" id="part2_country" class="form2-field"
+        title="Country"/>
+    </div>
+  </div>
+
+  <div class="row form-row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-large btn-block btn-primary saveBtn text-center" id="btn_part_2" 
+        title="Click to save Part Two of this form">
+        Save Part 2 of Form
+      </button>
+    </div>
+  </div>
+  
+</div>

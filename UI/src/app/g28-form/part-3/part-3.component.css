@@ -1,0 +1,21 @@
+.label .form3-field {
+    font-size: 12px;
+}
+
+.form3-field {
+    text-align: left;
+    display: block;
+    width: 100%;
+    min-height: 28px;
+    min-width: 100%!important;
+}
+
+.checkBoxSpacing {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.checkBoxLabel {
+    margin-left: 20px;
+    margin-right: 3px;
+}

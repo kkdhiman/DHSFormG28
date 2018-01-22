@@ -1,0 +1,11 @@
+.label .form5-field {
+    font-size: 12px;
+}
+
+.form5-field {
+    text-align: left;
+    display: block;
+    width: 100%;
+    min-height: 28px;
+    min-width: 100%!important;
+}

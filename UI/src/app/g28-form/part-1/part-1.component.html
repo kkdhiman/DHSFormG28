@@ -5,8 +5,8 @@
       <span class="label">1.  USCIS ELIS Account Number <em>(if any)</em>:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="number" max="999999999999" maxlength="12" id="elis_number" class="form1-field" 
-        title="Please enter your USCIS ELIS Account Number" />
+      <input type="number" max="999999999999" maxlength="12" id="part1_elis_number" class="form1-field" 
+        title="Please enter your USCIS ELIS Account Number" required/>
     </div>
   </div>
 
@@ -22,8 +22,8 @@
       <span class="label">2.a.  Family Name <em>(Last Name)</em>:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="80" id="last_name" class="form1-field"
-        title="Please enter your Family Name (Last Name)"/>
+      <input type="text" maxlength="80" id="part1_last_name" class="form1-field"
+        title="Please enter your Family Name (Last Name)" required/>
     </div>
   </div>
 
@@ -32,8 +32,8 @@
       <span class="label">2.b.  Given Name <em>(First Name)</em>:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="first_name" class="form1-field"
-        title="Please enter your Given Name (First Name)"/>
+      <input type="text" maxlength="40" id="part1_first_name" class="form1-field"
+        title="Please enter your Given Name (First Name)" required/>
     </div>
   </div>
 
@@ -42,8 +42,8 @@
       <span class="label">2.c.  Middle Name:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="middle_name" class="form1-field"
-        title="Please enter your Middle Name"/>
+      <input type="text" maxlength="40" id="part1_middle_name" class="form1-field"
+        title="Please enter your Middle Name" required/>
     </div>
   </div>
 
@@ -52,8 +52,8 @@
       <span class="label">3.a.  Street Number and Name:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="street_number_name" class="form1-field"
-        title="Please enter your Street Number and Street Name"/>
+      <input type="text" maxlength="40" id="part1_street_number_name" class="form1-field"
+        title="Please enter your Street Number and Street Name" required/>
     </div>
   </div>
 
@@ -63,19 +63,19 @@
     </div>
     <div class="col-md-1 radio text-left" title="Please select your address type">
       <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios1" value="apt" checked title="Apartment">
+        <input type="radio" name="part1_optionsRadios" id="part1_optionsRadios1" value="apt" checked title="Apartment">
         Apt.
       </label>
     </div>
     <div class="col-md-1 radio text-left">
       <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios2" value="ste" title="Suite">
+        <input type="radio" name="part1_optionsRadios" id="part1_optionsRadios2" value="ste" title="Suite">
         Ste.
       </label>
     </div>
     <div class="col-md-1 radio text-left">
       <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios3" value="flr" title="Floor">
+        <input type="radio" name="part1_optionsRadios" id="part1_optionsRadios3" value="flr" title="Floor">
         Flr.
       </label>
     </div>
@@ -86,8 +86,8 @@
       <span class="label">3.c. City or Town:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="city_town" class="form1-field"
-        title="Please enter your City or Town Name"/>
+      <input type="text" maxlength="40" id="part1_city_town" class="form1-field"
+        title="Please enter your City or Town Name" required/>
     </div>
   </div>
 
@@ -96,8 +96,8 @@
       <span class="label">3.d.  State:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="state" class="form1-field"
-        title="Please enter your State"/>
+      <input type="text" maxlength="40" id="part1_state" class="form1-field"
+        title="Please enter your State" required/>
     </div>
   </div>
 
@@ -106,8 +106,8 @@
       <span class="label">3.e.  Zip Code:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="zip" class="form1-field" 
-        title="Please enter your Zip Code"/>
+      <input type="text" maxlength="40" id="part1_zip" class="form1-field" 
+        title="Please enter your Zip Code" required/>
     </div>
   </div>
 
@@ -116,8 +116,8 @@
       <span class="label">3.f. Province:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="province" class="form1-field"
-        title="Please enter your Province"/>
+      <input type="text" maxlength="40" id="part1_province" class="form1-field"
+        title="Please enter your Province" required/>
     </div>
   </div>
 
@@ -126,8 +126,8 @@
       <span class="label">3.g. Postal Code:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="postal_code" class="form1-field"
-        title="Please enter your Postal Code"/>
+      <input type="text" maxlength="40" id="part1_postal_code" class="form1-field"
+        title="Please enter your Postal Code" required/>
     </div>
   </div>
 
@@ -136,8 +136,8 @@
       <span class="label">3.h. Country:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="country" class="form1-field" 
-        title="Please enter your Country"/>
+      <input type="text" maxlength="40" id="part1_country" class="form1-field" 
+        title="Please enter your Country" required/>
     </div>
   </div>
 
@@ -146,7 +146,7 @@
       <span class="label">4. Daytime Telephone Number:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="daytime_phone" class="form1-field"
+      <input type="tel" maxlength="40" id="part1_daytime_phone" class="form1-field"
         title="Please enter your Daytime Telephone Number"/>
     </div>
   </div>
@@ -156,7 +156,7 @@
       <span class="label">5. Fax Number:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="fax_number" class="form1-field"
+      <input type="tel" maxlength="40" id="part1_fax_number" class="form1-field"
         title="Please enter your Fax Number"/>
     </div>
   </div>
@@ -166,8 +166,8 @@
       <span class="label">6. E-Mail Address <em>(if any)</em>:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="fax_number" class="form1-field"
-        title="Please enter your E-Mail Address"/>
+      <input type="email" maxlength="40" id="part1_email" class="form1-field"
+        title="Please enter your E-Mail Address" required/>
     </div>
   </div>
 
@@ -176,8 +176,8 @@
       <span class="label">7. Mobile Telephone <em>(if any)</em>:</span>
     </div>
     <div class="col-md-8 text-left">
-      <input type="text" maxlength="40" id="fax_number" class="form1-field"
-        title="Please enter your Mobile Telephone Number"/>
+      <input type="tel" maxlength="40" id="part1_mobile_number" class="form1-field"
+        title="Please enter your Mobile Telephone Number" required/>
     </div>
   </div>
 

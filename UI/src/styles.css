@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+.sectionTitle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .form-heading {
     font-size: 14px;
     font-style: oblique; 
@@ -23,4 +28,14 @@
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.checkBoxSpacing {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.checkBoxLabel {
+    margin-left: 20px;
+    margin-right: 3px;
 }

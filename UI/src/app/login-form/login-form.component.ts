@@ -13,8 +13,6 @@ import { ConfigService } from '../config.service';
 export class LoginFormComponent implements OnInit {
 
   title = 'DHS Form G-28 Prototype';
-
-  // TODO: Update this value from an http call to the configuration service
   environment = '** DEV Environment **';
 
   constructor(private configService: ConfigService, private authService: AuthenticateService, private router: Router) {

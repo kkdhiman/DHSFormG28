@@ -19,39 +19,27 @@ export class LoginFormComponent implements OnInit {
 
   }
 
-  user = new User('', '', false, '');
+  user = new User('', '', '', false, '');
 
   ngOnInit() {
     this.getEnvironment();
-    // this.checkIfUserAuthenticated();
+    this.checkIfUserAuthenticated();
   }
 
   onLogin() {
     // DEBUG
     console.log(JSON.stringify(this.user));
-    console.log(JSON.stringify(this.authService.authenticateUser(this.user)));
-
-    if (this.user.authenticated === true) {
-      try {
-        // localStorage.setItem('G28User', JSON.stringify(this.user));
-      } catch (e) {}
-      this.router.navigate(['/form']);
-    } else {
-      try {
-        // localStorage.removeItem('G28User');
-      } catch (e) {}
-      this.router.navigate(['/']);
-    }
+    this.authService.authenticateUser(this.user);
   }
 
   checkIfUserAuthenticated() {
     let authData = '{}';
     try {
-      // authData = localStorage.getItem('G28User');
+      authData = localStorage.getItem('G28User');
     } catch (e) {}
     const currentUser = JSON.parse(authData);
     if (currentUser !== null && currentUser.authenticated === true) {
-     //  this.router.navigate(['/form']);
+      this.router.navigate(['/form']);
     }
   }
 

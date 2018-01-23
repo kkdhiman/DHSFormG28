@@ -1,6 +1,7 @@
 import { AppPage } from './app.po';
 
 describe('ui App', () => {
+  /*
   let page: AppPage;
 
   beforeEach(() => {
@@ -11,4 +12,5 @@ describe('ui App', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('DHS Form G-28 Prototype');
   });
+  */
 });

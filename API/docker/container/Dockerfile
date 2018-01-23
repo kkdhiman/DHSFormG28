@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy source file(s) to working directory
-COPY src/server.js .
+COPY src/ ./
 
 # Ensure port 3000 is open
 EXPOSE 3000

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var authenticate = require('../controllers/Authenticate');
+const authenticate = require('../controllers/Authenticate');
 
 router.post('/authenticate', authenticate);
 

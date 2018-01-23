@@ -15,11 +15,14 @@ function authenticate(req, res, next) {
             expiresIn: Config.tokenExpiration
         });
 
+        user.jwt = token;
+        user.password = "";
+
         // return the information including token as JSON
         res.json({
             success: true,
             message: 'Your token is valid for ' + Config.tokenExpiration,
-            token: token
+            user: user
         });
     } else {
         res.json({ success: false, message: 'Authentication failed.' });

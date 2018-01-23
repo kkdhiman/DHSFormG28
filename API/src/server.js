@@ -1,5 +1,8 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const routes = require('./routes/Routes');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const app = express();
 
 // Collection app settings from environment
 const G28_APP_ENV = process.env['DHS_G28_ENV'] || 'DEV';
@@ -29,6 +32,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+//app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+
 app.get('/', (req, res) => res.send(JSON.stringify(CONFIG)));
+app.use('/user', routes);
 
 app.listen(3000, () => console.log('Configuration Server listening on port 3000!'))

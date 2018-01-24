@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LogoutComponent } from './logout/logout.component';
 import { AuthenticateService } from './authenticate.service';
 import { ConfigService } from './config.service';
 import { G28FormComponent } from './g28-form/g28-form.component';
@@ -19,13 +20,15 @@ import { Part6Component } from './g28-form/part-6/part-6.component';
 
 const appRoutes: Routes = [
   { path: 'form', component: G28FormComponent },
-  { path: '', component: LoginFormComponent }
+  { path: '', component: LoginFormComponent },
+  { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
+    LogoutComponent,
     G28FormComponent,
     Part1Component,
     Part2Component,

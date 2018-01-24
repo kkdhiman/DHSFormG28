@@ -11,13 +11,17 @@ export class G28FormComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // this.checkIfUserAuthenticated();
+    this.checkIfUserAuthenticated();
   }
 
   checkIfUserAuthenticated() {
     const currentUser = JSON.parse(localStorage.getItem('G28User'));
     if (currentUser === null || currentUser.authenticated !== true) {
       this.router.navigate(['/']);
+    } else {
+      const userId = currentUser['id'];
+      console.log('User ' + userId + ' logged in.');
+      document.getElementById('whoami').textContent = 'Welcome, ' + userId;
     }
   }
 }

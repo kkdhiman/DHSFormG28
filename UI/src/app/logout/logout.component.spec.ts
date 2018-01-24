@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 import { LogoutComponent } from './logout.component';
 
@@ -8,7 +9,8 @@ describe('LogoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ]
+      declarations: [ LogoutComponent ],
+      providers: [  { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } } ]
     })
     .compileComponents();
   }));

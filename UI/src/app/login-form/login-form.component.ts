@@ -46,11 +46,7 @@ export class LoginFormComponent implements OnInit {
   getEnvironment() {
     this.configService.getEnvConfig().then((config) => {
       if (config['DHS_G28_ENV'] !== null) {
-        if (config['DHS_G28_ENV'] === 'PROD') {
-          this.environment = '** PROD Environment **';
-        } else if (config['DHS_G28_ENV'] === 'DEV') {
-          this.environment = '** DEV Environment **';
-        }
+        this.environment = '** ' + config['DHS_G28_ENV'] + ' Environment **';
       }
     }).catch((err) => {
       this.environment = '!! Unable To Contact Config Service !!';

@@ -39,3 +39,8 @@
     margin-left: 20px;
     margin-right: 3px;
 }
+
+.userSpan {
+    font-size: 10pt;
+    float: right;
+}

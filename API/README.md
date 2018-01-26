@@ -49,7 +49,7 @@ restart the server automatically when code changes are detected.
 
 #### Testing REST Endpoints
 
-[Use Postman for maual interface testing during development]: https://www.getpostman.com/ 
+[Use Postman for maual interface testing during development](https://www.getpostman.com/) 
 
 ### Dockerize
 

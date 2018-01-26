@@ -38,11 +38,18 @@ Or the server responds with an authentication message:
 ### Development 
 
 1.  ```cd API```
+1.  ```npm install```
 1.  ```npm run server```
+1.  Set the 'DHS_G28_ENV' environment variable per environment:
+    1.  export DHS_G28_ENV=DEV
 1.  Start adding and modifying files
 
 The command ```npm run server``` starts the node server on port 3000 and uses nodemon to 
 restart the server automatically when code changes are detected.
+
+#### Testing REST Endpoints
+
+[Use Postman for maual interface testing during development]: https://www.getpostman.com/ 
 
 ### Dockerize
 

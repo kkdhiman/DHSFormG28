@@ -13,13 +13,14 @@ import { ConfigService } from '../config.service';
 export class LoginFormComponent implements OnInit {
 
   constructor(private configService: ConfigService, private authService: AuthenticateService, private router: Router) {
-
+    
   }
 
   environment = '';
-  user = new User('', '', '', false, '');
+  user = new User('', '', '', '', '', '', false, '');
 
   ngOnInit() {
+    document.getElementById('whoami').textContent = 'LOGIN';
     this.getEnvironment();
     this.checkIfUserAuthenticated();
   }
@@ -28,6 +29,10 @@ export class LoginFormComponent implements OnInit {
     // DEBUG
     console.log(JSON.stringify(this.user));
     this.authService.authenticateUser(this.user);
+  }
+
+  createNewAccount()  {
+    this.router.navigate(['/create-account']);
   }
 
   checkIfUserAuthenticated() {

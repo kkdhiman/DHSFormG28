@@ -1,0 +1,58 @@
+<div class="container-fluid" id="header">
+
+    <br/>
+    <img width="200" alt="Dev Technology Logo" src="assets/images/dev-logo.png" title="Dev Technology Group, Inc.">
+    <br/><br/><br/>
+  </div>
+  
+  <div class="container create-container">
+    <form #createAccountForm="ngForm">
+      <div class="form-group">
+        <label for="username">User ID</label>
+        <input type="text" class="form-control" id="username" required 
+          [(ngModel)]="user.id" name="userid" title="Enter User ID"
+          data-placement="right" data-toggle="tooltip">
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="fname" required 
+          [(ngModel)]="user.first_name" name="fname" title="Enter First Name"
+          data-placement="right" data-toggle="tooltip">
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="lname" required 
+          [(ngModel)]="user.last_name" name="lname" title="Enter Last Name"
+          data-placement="right" data-toggle="tooltip">
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password1" required 
+          [(ngModel)]="password1" name="password1" title="Enter Password.  It must be at least 8 characters in length."
+          data-placement="right" data-toggle="tooltip">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password Again</label>
+        <input type="password" class="form-control" id="password2" required 
+          [(ngModel)]="password2" name="password2" title="Enter Password Again.  It must match the previously entered password."
+          data-placement="right" data-toggle="tooltip">
+      </div>
+  
+      <div class="buttonSpacer" style="text-align:center">
+        <button type="button" class="btn btn-primary create-button" (click)="createNewAccount()" title="Create New Account Button">
+          CREATE ACCOUNT
+        </button>
+      </div>
+
+      <div style="text-align:center">
+        <button type="button" class="btn btn-secondary create-button" (click)="cancel()" title="Cancel Button">
+          CANCEL
+        </button>
+      </div>
+
+    </form>
+  </div>

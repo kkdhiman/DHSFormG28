@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+#header {
+    margin-top: 0px;
+    text-align: center;
+    padding: 5px;
+}
 
 .sectionTitle {
     margin-top: 5px;

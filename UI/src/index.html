@@ -35,5 +35,13 @@
   </nav>
 
   <app-root></app-root>
+
+  <script>
+    // This will show tooltips, but only when a refresh loads the full index.html.
+    // TODO: Figure out how to get tooltips working when Angular loads fragments.
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 </body>
 </html>

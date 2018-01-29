@@ -1,4 +1,4 @@
 module.exports = {
 	'secret': 'NowIsTheTimeForAllGoodMen',
-	'tokenExpiration': '8h'
+	'tokenExpiration': '8h',
 };

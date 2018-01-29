@@ -4,7 +4,9 @@ const user = {
     id : "",
     password : "",
     authenticated : false,
-    jwt : ""
+    jwt : "",
+    first_name: "",
+    last_name: ""
 };
 
 module.exports = user;

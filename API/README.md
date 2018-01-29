@@ -42,6 +42,12 @@ Or the server responds with an authentication message:
 1.  ```npm run server```
 1.  Set the 'DHS_G28_ENV' environment variable per environment:
     1.  export DHS_G28_ENV=DEV
+1.  The following environment variables are needed for connecting to PostgreSQL:
+    1.  PGDATABASE
+    1.  PGHOST
+    1.  PGPASSWORD
+    1.  PGPORT
+    1.  PGUSER
 1.  Start adding and modifying files
 
 The command ```npm run server``` starts the node server on port 3000 and uses nodemon to 

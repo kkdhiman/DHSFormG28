@@ -1,22 +1,36 @@
 <div class="centerDIV">
-
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <br/>
   <img width="200" alt="Dev Technology Logo" src="assets/images/dev-logo.png" title="Dev Technology Group, Inc.">
   <br/><br/><br/>
 </div>
 
 <div class="container login-container">
-  <form #loginForm="ngForm">
-    <div class="form-group">
-      <label for="username">User ID</label>
-      <input type="text" class="form-control" id="username" required 
-        [(ngModel)]="user.id" name="userid" title="Enter User ID" data-placement="right" data-toggle="tooltip">
+  <form>
+    <div class="form-group" >
+      <label>User ID</label>
+      <input type="text" class="form-control" required
+        [(ngModel)]="user.id" title="Enter User ID" data-placement="right" data-toggle="tooltip" name="user" id="user" #userid="ngModel">
+        <div *ngIf="userid.invalid && (userid.dirty || userid.touched)" class="alert alert-danger">
+        <div *ngIf="userid.errors.required">
+            User ID is required
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" required 
-        [(ngModel)]="user.password" name="password" title="Enter Password" data-placement="right" data-toggle="tooltip">
+      <input type="password" class="form-control" required minlength="8"
+        [(ngModel)]="user.password" title="Enter Password" data-placement="right" data-toggle="tooltip" 
+          name="password" id="password" #password="ngModel">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Password is required
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Password must be 8 characters long
+        </div>
+      </div>
     </div>
 
     <div style="text-align:center">

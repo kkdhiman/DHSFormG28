@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { User } from '../user';
 import { AuthenticateService } from '../authenticate.service';
@@ -13,9 +14,10 @@ import { ConfigService } from '../config.service';
 export class LoginFormComponent implements OnInit {
 
   constructor(private configService: ConfigService, private authService: AuthenticateService, private router: Router) {
-    
   }
 
+  public loading = false;
+  loginForm: FormGroup;
   environment = '';
   user = new User('', '', '', '', '', '', false, '');
 
@@ -27,8 +29,38 @@ export class LoginFormComponent implements OnInit {
 
   onLogin() {
     // DEBUG
-    console.log(JSON.stringify(this.user));
-    this.authService.authenticateUser(this.user);
+    console.log('User Data ===> ' + JSON.stringify(this.user));
+    this.loading = true;
+    this.authService.authenticateUser(this.user).subscribe(
+      res => {
+        console.log(res);
+        this.loading = false;
+        try {
+          if (!res['success']) {
+            // TODO: Make a nicer alert dialog box
+            alert('Unknown userid/password combination');
+            try {
+              localStorage.removeItem('G28User');
+            } catch (e) {}
+            this.router.navigate(['/']);
+          } else {
+            const authuser = res['user'];
+            try {
+              // TODO: Validate User JWT Token expiration
+              localStorage.setItem('G28User', JSON.stringify(authuser));
+            } catch (e) {}
+            this.router.navigate(['/form']);
+          }
+        } catch (e) {
+          alert('An Unexpected Exception Occurred!');
+        }
+      },
+      err => {
+        console.log('Error occured');
+        this.loading = false;
+        alert('An Unexpected Exception Occurred!');
+      }
+    );
   }
 
   createNewAccount()  {
@@ -55,5 +87,7 @@ export class LoginFormComponent implements OnInit {
       this.environment = '!! Unable To Contact Config Service !!';
     });
   }
+
+  get diagnostic() { return JSON.stringify(this.user); }
 
 }

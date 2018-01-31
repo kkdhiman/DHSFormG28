@@ -1,15 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
+
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AuthenticateService } from './authenticate.service';
+import { CreateAccountService } from './create-account.service';
 import { ConfigService } from './config.service';
 import { G28FormComponent } from './g28-form/g28-form.component';
 import { Part1Component } from './g28-form/part-1/part-1.component';
@@ -43,13 +46,22 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule.withServerTransition({appId: 'ui'}),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#fff000',
+      secondaryColour: '#fffff0',
+      tertiaryColour: '#ffffff'
+    }),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [AuthenticateService, ConfigService],
+  providers: [AuthenticateService, ConfigService, CreateAccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

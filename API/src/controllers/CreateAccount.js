@@ -25,6 +25,7 @@ function create_account(req, res, next) {
     user.password = req.body.password;
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
+    user.email = req.body.email;
 
     console.log('User -> ' + JSON.stringify(user));
     console.log('CONFIG VALUES -> ' + JSON.stringify(Config));
@@ -32,7 +33,9 @@ function create_account(req, res, next) {
     try {
 
         // Encrypt Password
-        password_hash = Passwords.hashPassword(user.password, SALT);
+        const passWord = user.password.trim();
+        console.log('Password to hash => ' + passWord);
+        password_hash = Passwords.hashPassword(passWord, SALT);
 
         // Connect to PostgreSQL
         client.connect((err, client, done) => {
@@ -44,13 +47,14 @@ function create_account(req, res, next) {
 
             // Insert User Account Data
             client.query('INSERT INTO g28formusers(user_id, password_hash, first_name, last_name, email_address, salt, role_id) values($1, $2, $3, $4, $5, $6, $7)',
-                [user.id, password_hash, user.first_name, user.last_name, user.email_address, SALT, 2], (err, result) => {
+                [user.id, password_hash, user.first_name, user.last_name, user.email, SALT, 2], (err, result) => {
 
                 done();
 
                 if (err) {
                     res.status(500).json({success: false, message: JSON.stringify(err)});
                 } else {
+                    console.log('Successfully Created Account!');
                     res.status(200).json({ success: true, user_id: user.id, message: 'Account Created' });
                 } 
             });

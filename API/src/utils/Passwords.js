@@ -1,20 +1,23 @@
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
+const pg = require('pg');
+const client = new pg.Pool();
 
 const passwords = {
-
-    // Simple password database for now.
-    // Used saltRounds = 10 and bcrypt.hashSync() to generate test password
-    // TODO: Replace with database lookup
-    userdb : [
-        { "id":"jcaple", "email":"fakenews@yahoo.com", "password":"$2a$10$Z1ksw.74b/OGXFTOjEuMWeopL4SLsPB22EDaDxdYWyYr2iDS97zPa" }
-    ],
 
     /**
      * Compare password hashes to see if they match.
      */
-    checkPasswd:function(userid, passwdTest) {
-        const userPasswdHash = passwords.getPasswdHashFromUserId(userid);
-        return bcrypt.compareSync(passwdTest, userPasswdHash);
+    checkPasswd:function(userid, passwdTest, cb) {
+        console.log('Checking password for: ' + userid + ' ' + passwdTest);
+        passwords.getPasswdHashFromUserId(userid, function(userPasswdHash) {
+            console.log('Response->' + userPasswdHash + ':');
+            match = false;
+            if(userPasswdHash) {
+                match = bcrypt.compareSync(passwdTest, userPasswdHash);
+                console.log('Do Passwords Match? ' + match);
+            }
+            cb(match);
+        }); 
     },
 
     /**
@@ -28,14 +31,33 @@ const passwords = {
     /**
      * Look up a password hash by userid.
      */
-    getPasswdHashFromUserId:function(userid) {
-        let hash = "";
-        for(let i=0;i<passwords.userdb.length;i++) {
-            pass = passwords.userdb[i];
-            if (pass.id === userid) 
-                hash = pass.password;
-        }
-        return hash;
+    getPasswdHashFromUserId:function(userid, cb) {
+        client.connect((err, client, done) => {
+            if(err) {
+                console.log(err);
+                done();
+                cb(null);
+            }
+
+            // Insert User Account Data
+            client.query('SELECT password_hash from g28formusers where user_id = $1',
+                [userid], (ex, result) => {
+
+                done();
+
+                if (ex) {
+                    console.log('**Error -> ' + JSON.stringify(ex));
+                    cb(null);
+                } else {
+                    console.log('Retreived Password for ' + userid + '-->' + JSON.stringify(result));
+                    if (result.rows.length == 0) 
+                        cb(null);
+                    else
+                        cb(result.rows[0].password_hash);
+                } 
+            });
+        });
+
     }
 };
 

@@ -1,58 +1,106 @@
 <div class="container-fluid" id="header">
-
-    <br/>
-    <img width="200" alt="Dev Technology Logo" src="assets/images/dev-logo.png" title="Dev Technology Group, Inc.">
-    <br/><br/><br/>
-  </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <br/>
+  <img width="200" alt="Dev Technology Logo" src="assets/images/dev-logo.png" title="Dev Technology Group, Inc.">
+  <br/><br/><br/>
+</div>
   
-  <div class="container create-container">
-    <form #createAccount="ngForm">
-      <div class="form-group">
-        <label for="username">User ID</label>
-        <input type="text" class="form-control" id="username" required 
-          [(ngModel)]="user.id" name="userid" title="Enter User ID"
-          data-placement="right" data-toggle="tooltip">
-      </div>
+<div class="container create-container">
 
-      <div class="form-group">
-        <label for="first_name">First Name</label>
-        <input type="text" class="form-control" id="fname" required 
-          [(ngModel)]="user.first_name" name="fname" title="Enter First Name"
-          data-placement="right" data-toggle="tooltip">
+  <form>
+    <div class="form-group">
+      <label for="username">User ID</label>
+      <input type="text" class="form-control" id="id" name="id" required 
+        [(ngModel)]="user.id" title="Enter User ID"
+        data-placement="right" data-toggle="tooltip" #userid="ngModel">
+      <div *ngIf="userid.invalid && (userid.dirty || userid.touched)" class="alert alert-danger">
+        <div *ngIf="userid.errors.required">
+            User ID is required
+        </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="last_name">Last Name</label>
-        <input type="text" class="form-control" id="lname" required 
-          [(ngModel)]="user.last_name" name="lname" title="Enter Last Name"
-          data-placement="right" data-toggle="tooltip">
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" class="form-control" id="fname" required 
+        [(ngModel)]="user.first_name" name="fname" title="Enter First Name"
+        data-placement="right" data-toggle="tooltip" #fname="ngModel">
+      <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
+        <div *ngIf="fname.errors.required">
+            First Name is required
+        </div>
       </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password1" required 
-          [(ngModel)]="password1" name="password1" title="Enter Password.  It must be at least 8 characters in length."
-          data-placement="right" data-toggle="tooltip">
-      </div>
+    </div>
 
-      <div class="form-group">
-        <label for="password">Password Again</label>
-        <input type="password" class="form-control" id="password2" required 
-          [(ngModel)]="password2" name="password2" title="Enter Password Again.  It must match the previously entered password."
-          data-placement="right" data-toggle="tooltip">
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="lname" required 
+        [(ngModel)]="user.last_name" name="lname" title="Enter Last Name"
+        data-placement="right" data-toggle="tooltip" #lname="ngModel">
+      <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
+        <div *ngIf="lname.errors.required">
+            Last Name is required
+        </div>
       </div>
-  
-      <div class="buttonSpacer" style="text-align:center">
-        <button type="button" class="btn btn-primary create-button" (click)="createNewAccount()" title="Create New Account Button">
-          CREATE ACCOUNT
-        </button>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" required 
+        [(ngModel)]="user.email" name="email" title="Enter Email Address"
+        data-placement="right" data-toggle="tooltip" #eml="ngModel">
+      <div *ngIf="eml.invalid && (eml.dirty || eml.touched)" class="alert alert-danger">
+        <div *ngIf="eml.errors.required">
+            E-mail Address is required
+        </div>
       </div>
+    </div>
 
-      <div style="text-align:center">
-        <button type="button" class="btn btn-secondary create-button" (click)="cancel()" title="Cancel Button">
-          CANCEL
-        </button>
-      </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password1" required minlength="8"
+        [(ngModel)]="password1" name="password1" title="Enter Password.  It must be at least 8 characters in length."
+        data-placement="right" data-toggle="tooltip" #passwd="ngModel">
+        <div *ngIf="passwd.invalid && (passwd.dirty || passwd.touched)" class="alert alert-danger">
+          <div *ngIf="passwd.errors.required">
+            Password is required
+          </div>
+          <div *ngIf="passwd.errors.minlength">
+            Password must be 8 characters long
+          </div>
+        </div>
+    </div>
 
-    </form>
-  </div>
+    <div class="form-group">
+      <label for="password">Password Again</label>
+      <input type="password" class="form-control" id="password2" required required minlength="8"
+        [(ngModel)]="password2" name="password2" title="Enter Password Again.  It must match the previously entered password."
+        data-placement="right" data-toggle="tooltip" #passwd2="ngModel">
+      <div *ngIf="(passwd2.invalid && (passwd2.dirty || passwd2.touched))" class="alert alert-danger">
+        <div *ngIf="passwd2.errors.required">
+          Password is required
+        </div>
+        <div *ngIf="passwd2.errors.minlength">
+          Password must be 8 characters long
+        </div>
+      </div>
+      <div *ngIf="password1 !== password2" class="alert alert-danger">
+        Passwords do not match
+      </div>
+    </div>
+
+    <div class="buttonSpacer" style="text-align:center">
+      <button type="button" class="btn btn-primary create-button" (click)="createNewAccount()" title="Create New Account Button">
+        CREATE ACCOUNT
+      </button>
+    </div>
+
+    <div style="text-align:center">
+      <button type="button" class="btn btn-secondary create-button" (click)="cancel()" title="Cancel Button">
+        CANCEL
+      </button>
+    </div>
+
+  </form>
+
+</div>

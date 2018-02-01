@@ -32,32 +32,41 @@ const passwords = {
      * Look up a password hash by userid.
      */
     getPasswdHashFromUserId:function(userid, cb) {
-        client.connect((err, client, done) => {
-            if(err) {
-                console.log(err);
-                done();
-                cb(null);
-            }
-
-            // Insert User Account Data
-            client.query('SELECT password_hash from g28formusers where user_id = $1',
-                [userid], (ex, result) => {
-
-                done();
-
-                if (ex) {
-                    console.log('**Error -> ' + JSON.stringify(ex));
+        try {
+            client.connect((err, client, done) => {
+                if(err) {
+                    console.log(err);
+                    done();
                     cb(null);
-                } else {
-                    console.log('Retreived Password for ' + userid + '-->' + JSON.stringify(result));
-                    if (result.rows.length == 0) 
-                        cb(null);
-                    else
-                        cb(result.rows[0].password_hash);
-                } 
-            });
-        });
+                }
 
+                try {
+                    // Insert User Account Data
+                    client.query('SELECT password_hash from g28formusers where user_id = $1',
+                        [userid], (ex, result) => {
+
+                        done();
+
+                        if (ex) {
+                            console.log('**Error -> ' + JSON.stringify(ex));
+                            cb(null);
+                        } else {
+                            console.log('Retreived Password for ' + userid + '-->' + JSON.stringify(result));
+                            if (result.rows.length == 0) 
+                                cb(null);
+                            else
+                                cb(result.rows[0].password_hash);
+                        } 
+                    });
+                } catch (e) {
+                    console.log('Unexpected exception running database query: ' + JSON.stringify(e));
+                    cb(null);
+                }
+            });
+        } catch (e) {
+            console.log('Failed to connect to PostgreSQL: ' + JSON.stringify(e));
+            cb(null);
+        }
     }
 };
 

@@ -7,6 +7,45 @@ const app = express();
 // Collection app settings from environment
 const G28_APP_ENV = process.env['DHS_G28_ENV'] || 'DEV';
 
+// Database Connection Params that must be set or or don't start the server
+const PGDATABASE = process.env['PGDATABASE'];
+const PGHOST = process.env['PGHOST'];
+const PGPASSWORD = process.env['PGPASSWORD'];
+const PGPORT = process.env['PGPORT'];
+const PGUSER = process.env['PGUSER'];
+
+let problemConfig = false;
+
+if (PGDATABASE === null || PGDATABASE === undefined) {
+    console.log('*** PGDATABASE is not set.');
+    problemConfig = true;
+}
+
+if (PGHOST === null || PGHOST === undefined) {
+    console.log('*** PGHOST is not set');
+    problemConfig = true;
+}
+
+if (PGPASSWORD === null || PGPASSWORD === undefined) {
+    console.log('*** PGPASSWORD is not set');
+    problemConfig = true;
+}
+
+if (PGPORT === null || PGPORT === undefined) {
+    console.log('*** PGPORT is not set');
+    problemConfig = true;
+}
+
+if (PGUSER === null || PGUSER === undefined) {
+    console.log('*** PGUSER is not set');
+    problemConfig = true;
+}
+
+if (problemConfig) {
+    console.log('!! Critical database configuration settings not set.  Exiting.');
+    process.exit();
+}
+
 // Make configuration settings available as JSON String
 let CONFIG = {
     'DHS_G28_ENV': G28_APP_ENV

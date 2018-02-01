@@ -24,6 +24,12 @@ To build a suite of Docker Microservices, and an associated User Interface, for 
 1.  docker build -t dhsformg28-api:latest -f ./docker/container/Dockerfile .
 1.  Set the 'DHS_G28_ENV' environment variable per environment:
     1.  export DHS_G28_ENV=DEV
+1.  The following environment variables are needed for connecting to PostgreSQL:
+    1.  PGDATABASE
+    1.  PGHOST
+    1.  PGPASSWORD
+    1.  PGPORT
+    1.  PGUSER
 1.  docker run -p 3000:3000 -e DHS_G28_ENV dhsformg28-api:latest
 
 ### Running UI For Development

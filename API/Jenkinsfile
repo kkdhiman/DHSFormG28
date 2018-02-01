@@ -69,7 +69,7 @@ node {
                 PGPORT="##PGPORT##"
                 PGUSER="##PGUSER##"
 
-                sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose-temp.yml" > "docker-compose.yml"
+                sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose.yml" > "docker-compose.yml"
                 sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose.yml" > "docker-compose.yml"
                 sed "s~$PGPASSWORD~$PGPASSWORD_VAL~g" "docker-compose.yml" > "docker-compose.yml"
                 sed "s~$PGPORT~$PGPORT_VAL~g" "docker-compose.yml" > "docker-compose.yml"

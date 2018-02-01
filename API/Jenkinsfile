@@ -70,7 +70,10 @@ node {
                 PGUSER="##PGUSER##"
 
                 sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose-temp.yml" > "docker-compose.yml"
-                sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose-temp.yml" > "docker-compose.yml"
+                sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose.yml" > "docker-compose.yml"
+                sed "s~$PGPASSWORD~$PGPASSWORD_VAL~g" "docker-compose.yml" > "docker-compose.yml"
+                sed "s~$PGPORT~$PGPORT_VAL~g" "docker-compose.yml" > "docker-compose.yml"
+                sed "s~$PGUSER~$PGUSER_VAL~g" "docker-compose.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry
                 /usr/local/bin/ecs-cli compose --project-name ${TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}

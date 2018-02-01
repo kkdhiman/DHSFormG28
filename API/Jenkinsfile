@@ -58,10 +58,19 @@ node {
                 cd /var/lib/jenkins/workspace/DHSFormG28-API/API/docker/deploy
                 sed "s~$orig~$tag~g" "docker-compose-template.yml" > "docker-compose-temp.yml"
 
+                # Pull environment values out of Jenkins Job Configuration to set in Docker Container Config
                 env_tag="##ENV##"
                 env_val="DEV"
-
                 sed "s~$env_tag~$env_val~g" "docker-compose-temp.yml" > "docker-compose.yml"
+
+                PGDATABASE="##PGDATABASE##"
+                PGHOST="##PGHOST##"
+                PGPASSWORD="##PGPASSWORD##"
+                PGPORT="##PGPORT##"
+                PGUSER="##PGUSER##"
+
+                sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose-temp.yml" > "docker-compose.yml"
+                sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose-temp.yml" > "docker-compose.yml"
 
                 # Refresh cluster with new image in registry
                 /usr/local/bin/ecs-cli compose --project-name ${TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}

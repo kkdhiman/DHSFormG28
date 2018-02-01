@@ -6,6 +6,11 @@ services:
       - "3000:3000"
     environment:
       - DHS_G28_ENV=##ENV##
+      - PGDATABASE=##PGDATABASE##
+      - PGHOST=##PGHOST##
+      - PGPASSWORD=##PGPASSWORD##
+      - PGPORT=##PGPORT##
+      - PGUSER=##PGUSER##
     logging:
       driver: awslogs
       options: 

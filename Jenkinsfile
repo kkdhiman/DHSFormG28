@@ -74,13 +74,13 @@ node {
             #########################################################################
             orig="##TAG##"
             cd /var/lib/jenkins/workspace/DHSFormG28-PROD-Deploy/API/docker/deploy
-            sed "s~$orig~${API_IMG}~g" "docker-compose-template.yml" > "docker-compose-temp1.yml"
+            sed "s~$orig~${API_IMG}~g" "docker-compose-template.yml" > "docker-compose-temp.yml"
 
             env_tag="##ENV##"
             env_val="PROD"
 
             # Update the Docker Environment Variable to indicate PROD
-            sed "s~$env_tag~$env_val~g" "docker-compose-temp1.yml" > "docker-compose-temp2.yml"
+            sed "s~$env_tag~$env_val~g" "docker-compose-temp.yml" > "docker-compose-temp1.yml"
 
             PGDATABASE="##PGDATABASE##"
             PGHOST="##PGHOST##"
@@ -88,13 +88,13 @@ node {
             PGPORT="##PGPORT##"
             PGUSER="##PGUSER##"
 
-            sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose-temp2.yml" > "docker-compose-temp3.yml"
-            sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose-temp3.yml" > "docker-compose-temp4.yml"
-            sed "s~$PGPASSWORD~$PGPASSWORD_VAL~g" "docker-compose-temp4.yml" > "docker-compose-temp5.yml"
-            sed "s~$PGPORT~$PGPORT_VAL~g" "docker-compose-temp5.yml" > "docker-compose-temp6.yml"
-            sed "s~$PGUSER~$PGUSER_VAL~g" "docker-compose-temp6.yml" > "docker-compose.yml"
+            sed "s~$PGDATABASE~$PGDATABASE_VAL~g" "docker-compose-temp1.yml" > "docker-compose-temp2.yml"
+            sed "s~$PGHOST~$PGHOST_VAL~g" "docker-compose-temp2.yml" > "docker-compose-temp3.yml"
+            sed "s~$PGPASSWORD~$PGPASSWORD_VAL~g" "docker-compose-temp3.yml" > "docker-compose-temp4.yml"
+            sed "s~$PGPORT~$PGPORT_VAL~g" "docker-compose-temp4.yml" > "docker-compose-temp5.yml"
+            sed "s~$PGUSER~$PGUSER_VAL~g" "docker-compose-temp5.yml" > "docker-compose.yml"
 
-            rm -f docker-compose-temp[1-6].yml
+            rm -f docker-compose-temp[1-5].yml
 
             # Refresh cluster with new image in registry
             /usr/local/bin/ecs-cli compose --project-name ${API_TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}

@@ -30,6 +30,14 @@ export class LoginFormComponent implements OnInit {
   onLogin() {
     // DEBUG
     console.log('User Data ===> ' + JSON.stringify(this.user));
+
+    // TODO: Let form validation catch this: gray out 'LOGIN' button
+    // until userid and password field values are valid.
+    if (this.user.id === undefined || this.user.id === '' || this.user.password === undefined || this.user.password === '') {
+      alert('User ID and Password are required.');
+      return;
+    }
+
     this.loading = true;
     this.authService.authenticateUser(this.user).subscribe(
       res => {

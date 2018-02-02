@@ -110,8 +110,8 @@ node {
                 --task-definition ${API_TASK_DEFINITION_NAME}:${VERSION} --desired-count ${DESIRED_COUNT}
 
             # Cleanup
-            rm -f docker-compose-temp[1-5].yml
-            rm -f docker-compose-temp.yml
+            # rm -f docker-compose-temp[1-5].yml
+            # rm -f docker-compose-temp.yml
             # rm -f docker-compose.yml
 
         '''

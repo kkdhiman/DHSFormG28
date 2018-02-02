@@ -8,6 +8,11 @@ node {
     // CLUSTER_NAME - Name of the ECS Fargate Cluster to deploy to.
     // TASK_DEFINITION_NAME - Fargate Service Task Def. Name
     // SERVICE_NAME - Fargate Service Name
+    // PGDATABASE_VAL - The DEV Database Name
+    // PGHOST_VAL - The DEV Database URL
+    // PGPASSWORD_VAL - The DEV Database Password
+    // PGPORT_VAL - The DEV Database Port (e.g., 5432)
+    // PGUSER_VAL - The DEV Database username
 
     // Clean Workspace
     cleanWs()

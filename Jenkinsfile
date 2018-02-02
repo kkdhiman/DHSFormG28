@@ -10,6 +10,11 @@ node {
     // CLUSTER_NAME - The ECS Fargate PROD Cluster
     // UI_SERVICE_NAME - The PROD Cluster UI Service Name
     // API_SERVICE_NAME - The PROD Cluster API Service Name
+    // PGDATABASE_VAL - The PROD Database Name
+    // PGHOST_VAL - The PROD Database URL
+    // PGPASSWORD_VAL - The PROD Database Password
+    // PGPORT_VAL - The PROD Database Port (e.g., 5432)
+    // PGUSER_VAL - The PROD Database username
 
     stage('Checkout Code') {
         checkout([

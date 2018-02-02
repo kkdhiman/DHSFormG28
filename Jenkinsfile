@@ -95,6 +95,7 @@ node {
             sed "s~$PGUSER~$PGUSER_VAL~g" "docker-compose-temp5.yml" > "docker-compose.yml"
 
             rm -f docker-compose-temp[1-5].yml
+            rm -f docker-compose.yml
 
             # Refresh cluster with new image in registry
             /usr/local/bin/ecs-cli compose --project-name ${API_TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}

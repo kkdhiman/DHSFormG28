@@ -111,7 +111,8 @@ node {
 
             # Cleanup
             rm -f docker-compose-temp[1-5].yml
-            rm -f docker-compose.yml
+            rm -f docker-compose-temp.yml
+            # rm -f docker-compose.yml
 
         '''
     }

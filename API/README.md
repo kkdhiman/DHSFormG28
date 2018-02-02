@@ -63,4 +63,10 @@ restart the server automatically when code changes are detected.
 1.  docker build -t dhsformg28-api:latest -f ./docker/container/Dockerfile .
 1.  Set the 'DHS_G28_ENV' environment variable per environment:
     1.  export DHS_G28_ENV=DEV
-1.  docker run -p 3000:3000 -e DHS_G28_ENV dhsformg28-api:latest
+1.  The following environment variables are needed for connecting to PostgreSQL:
+    1.  PGDATABASE
+    1.  PGHOST
+    1.  PGPASSWORD
+    1.  PGPORT
+    1.  PGUSER
+1.  docker run -p 3000:3000 -e DHS_G28_ENV -e PGDATABASE -e PGHOST -e PGPASSWORD -e PGPORT -e PGUSER dhsformg28-api:latest

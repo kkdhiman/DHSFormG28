@@ -94,9 +94,6 @@ node {
             sed "s~$PGPORT~$PGPORT_VAL~g" "docker-compose-temp4.yml" > "docker-compose-temp5.yml"
             sed "s~$PGUSER~$PGUSER_VAL~g" "docker-compose-temp5.yml" > "docker-compose.yml"
 
-            rm -f docker-compose-temp[1-5].yml
-            rm -f docker-compose.yml
-
             # Refresh cluster with new image in registry
             /usr/local/bin/ecs-cli compose --project-name ${API_TASK_DEFINITION_NAME} up --launch-type FARGATE -c ${CLUSTER_NAME}
 
@@ -111,6 +108,10 @@ node {
 
             aws ecs update-service --cluster ${CLUSTER_NAME} --service ${API_SERVICE_NAME} \
                 --task-definition ${API_TASK_DEFINITION_NAME}:${VERSION} --desired-count ${DESIRED_COUNT}
+
+            # Cleanup
+            rm -f docker-compose-temp[1-5].yml
+            rm -f docker-compose.yml
 
         '''
     }

@@ -20,7 +20,7 @@ node {
     stage('Checkout Code') {
         checkout([
             $class: 'GitSCM', 
-            branches: [[name: '*/team2']], 
+            branches: [[name: '*/team3']], 
             doGenerateSubmoduleConfigurations: false, 
             extensions: [], 
             submoduleCfg: [], 
@@ -65,7 +65,7 @@ node {
 
                 # Pull environment values out of Jenkins Job Configuration to set in Docker Container Config
                 env_tag="##ENV##"
-                env_val="TEAM 2"
+                env_val="TEAM 3"
                 sed "s~$env_tag~$env_val~g" "docker-compose-temp.yml" > "docker-compose-temp1.yml"
 
                 PGDATABASE="##PGDATABASE##"

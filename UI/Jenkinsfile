@@ -28,7 +28,7 @@ node {
     stage('Checkout Code') {
         checkout([
             $class: 'GitSCM', 
-            branches: [[name: '*/team1']], 
+            branches: [[name: '*/team3']], 
             doGenerateSubmoduleConfigurations: false, 
             extensions: [], 
             submoduleCfg: [], 
@@ -53,11 +53,11 @@ node {
                 docker pull ${PRE_BUILT_BUILD_TEST_IMAGE}
 
                 # Run the pre-buit build image in a container that mounts the source directory
-                docker run -it -d --name="dhsg28-ui-build2" \
+                docker run -it -d --name="dhsg28-ui-build3" \
                     -v /var/lib/jenkins/workspace/DHSFormG28-UI/UI:/app ${PRE_BUILT_BUILD_TEST_IMAGE}
 
                 # Run npm install in the docker container
-                docker exec dhsg28-ui-build2 /bin/bash -c "cd /app;npm install"
+                docker exec dhsg28-ui-build3 /bin/bash -c "cd /app;npm install"
 
             '''
         }
@@ -67,7 +67,7 @@ node {
             echo 'Unit Testing...'
 
             // Run Unit Tests
-            sh 'docker exec dhsg28-ui-build2 /bin/bash -c "cd /app;npm run coverage"'
+            sh 'docker exec dhsg28-ui-build3 /bin/bash -c "cd /app;npm run coverage"'
 
             // Publish Test Results
             junit keepLongStdio: true, testResults: '**/*-results.xml'
@@ -86,7 +86,7 @@ node {
 
             echo 'E2E Testing...'
 
-            sh 'docker exec dhsg28-ui-build2 /bin/bash -c "cd /app;npm run e2e"'
+            sh 'docker exec dhsg28-ui-build3 /bin/bash -c "cd /app;npm run e2e"'
         }
 
         stage('OWASP Dependency Security Scan') {
@@ -139,7 +139,7 @@ node {
 
             sh '''
                 # Build UI artifacts
-                docker exec dhsg28-ui-build2 /bin/bash -c "cd /app;ng build"
+                docker exec dhsg28-ui-build3 /bin/bash -c "cd /app;ng build"
             
                 # Change directory to UI
                 cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI
@@ -242,7 +242,7 @@ node {
 
         }
     } finally {
-        sh 'docker container stop dhsg28-ui-build2'
-        sh 'docker container rm dhsg28-ui-build2'
+        sh 'docker container stop dhsg28-ui-build3'
+        sh 'docker container rm dhsg28-ui-build3'
     }
 }

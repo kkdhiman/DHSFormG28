@@ -20,7 +20,7 @@ node {
     stage('Checkout Code') {
         checkout([
             $class: 'GitSCM', 
-            branches: [[name: '*/master']], 
+            branches: [[name: '*/team1']], 
             doGenerateSubmoduleConfigurations: false, 
             extensions: [], 
             submoduleCfg: [], 

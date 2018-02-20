@@ -243,5 +243,6 @@ node {
         }
     } finally {
         sh 'docker container stop dhsg28-ui-build2'
+        sh 'docker container rm dhsg28-ui-build2'
     }
 }

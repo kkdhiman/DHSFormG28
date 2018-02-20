@@ -32,7 +32,7 @@ node {
             doGenerateSubmoduleConfigurations: false, 
             extensions: [], 
             submoduleCfg: [], 
-            userRemoteConfigs: [[url: 'https://github.com/jcaple-devtech/DHSFormG28-TEAM1.git']]])
+            userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
     }
 
     // Perform the build in an appropriate docker container so we don't have to install

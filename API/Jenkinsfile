@@ -65,7 +65,7 @@ node {
 
                 # Pull environment values out of Jenkins Job Configuration to set in Docker Container Config
                 env_tag="##ENV##"
-                env_val="DEV"
+                env_val="TEAM 1"
                 sed "s~$env_tag~$env_val~g" "docker-compose-temp.yml" > "docker-compose-temp1.yml"
 
                 PGDATABASE="##PGDATABASE##"

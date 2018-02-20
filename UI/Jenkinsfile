@@ -14,7 +14,7 @@ node {
 
     // Clean previously built images
     try {
-        sh 'docker image rm g28form:latest -f'
+        sh 'docker image rm ${IMAGE_NAME}:latest -f'
     } catch (e) {
         echo 'Error removing previously generated image.  Not a big deal.'
     }
@@ -32,7 +32,7 @@ node {
             doGenerateSubmoduleConfigurations: false, 
             extensions: [], 
             submoduleCfg: [], 
-            userRemoteConfigs: [[url: 'https://github.com/DevTechnology/DHSFormG28.git']]])
+            userRemoteConfigs: [[url: 'https://github.com/jcaple-devtech/DHSFormG28-TEAM1.git']]])
     }
 
     // Perform the build in an appropriate docker container so we don't have to install
@@ -145,7 +145,7 @@ node {
                 cd /var/lib/jenkins/workspace/DHSFormG28-UI/UI
                 
                 # Build the UI Docker Image
-                docker build -t g28form:latest -f ./docker/container/Dockerfile .
+                docker build -t ${IMAGE_NAME}:latest -f ./docker/container/Dockerfile .
 
             '''
             
@@ -163,7 +163,7 @@ node {
                 sh '''
 
                     # Run our containerized app for pen testing. Run on 8001 since Jenkins is on 80.
-                    docker run --name UI -d -p 8001:80 g28form:latest
+                    docker run --name UI -d -p 8001:80 ${IMAGE_NAME}:latest
 
                     # Get the docker container IP
                     #APP_ID=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' UI`
@@ -215,7 +215,7 @@ node {
                 tag=${MASTER_IMAGE_NAME}:v_${BUILD_NUMBER}
 
                 # Push docker image to ECS Registry
-                docker tag g28form:latest ${tag}
+                docker tag ${IMAGE_NAME}:latest ${tag}
 
                 # Push docker image to ECS Registry
                 docker push ${tag}
@@ -243,6 +243,5 @@ node {
         }
     } finally {
         sh 'docker container stop dhsg28-ui-build'
-        sh 'docker container rm dhsg28-ui-build'
     }
 }
